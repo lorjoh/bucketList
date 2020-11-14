@@ -74,30 +74,27 @@
 
                         </li>
                     </ul>
-                                   </div>
-                
+                </div>
+                <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
 
             </div>
             <div class="col-sm-4">
                 <!-- <div class="row ml-2 border border-dark rounded">
                             <hr> -->
-                <div class="col-sm-12" id="Park-info">
-                    <ul class="list-group">
-                        <li class="list-group-item" id="activitySelected">
-
-                        </li>
-                        <li class="list-group-item" id="topicSelected">
-
-                        </li>
-                        <li class="list-group-item" id="parkSelected">
-
-                        </li>
-                    </ul>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Filtered Parks
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class="custom-select" id="queriedPark" onchange="showfilteredPark(this)">
+                            <option value="">-- Select a Park--</option>
+                        </select>
+                    </button>
                 </div>
-                <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
-                <br>
+                <p>Select a Park and click the Focus Button</Select></p>
+                <hr>
                 <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
-                    id="focus-on-item">focus</button>
+                    id="focus-on-item">Focus</button>
             </div>
 
 
@@ -106,7 +103,7 @@
         </div>
         <hr>
     </div>
-   
+
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -267,6 +264,25 @@
         { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
         { "park_name": "Zion National Park", "park_code": "zion" }];
 
+
+
+        var park = document.getElementById('selectedPark');
+        for (var i = 0; i < parks.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            park.innerHTML = park.innerHTML +
+                '<option value="' + parks[i]['park_code'] + '">' + parks[i]['park_name'] + '</option>';
+        }
+
+    }
+
+    function showPark(park) {
+        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+        var parkSelected = document.getElementById('parkSelected');
+        parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
+            'ID: <b class="codes">' + park.value + '</b>';
+    }
+
+    function populateFilteredParks() {
         var filteredParks = [{ "park_name": "Abraham Lincoln Birthplace National Historical Park", "park_code": "abli" },
         { "park_name": "Acadia National Park", "park_code": "acad" },
         { "park_name": "Adams National Historical Park", "park_code": "adam" },
@@ -277,33 +293,78 @@
         { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
         { "park_name": "Zion National Park", "park_code": "zion" }];
 
-        var park = document.getElementById('selectedPark');
-        for (var i = 0; i < parks.length; i++) {
+        var filteredPark = document.getElementById('queriedPark');
+        for (var i = 0; i < filteredParks.length; i++) {
             // POPULATE SELECT ELEMENT WITH JSON.
-            park.innerHTML = park.innerHTML +
-                '<option value="' + parks[i]['park_code'] + '">' + parks[i]['park_name'] + '</option>';
+            filteredPark.innerHTML = filteredPark.innerHTML +
+                '<option value="' + filteredParks[i]['park_code'] + '">' + filteredParks[i]['park_name'] + '</option>';
         }
     }
-
-    function showPark(park) {
-        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
-        var parkSelected = document.getElementById('parkSelected');
-        console.log(park, 'parkSelected');
-        parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
-            'ID: <b class="codes">' + park.value + '</b>';
-    }
-
-
     populatePark()
     populateTopic()
     populateActivity()
+    populateFilteredParks()
 
-$(".list-group-item").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log(code);
+    // function showfilteredPark(park) {
+    //     // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+    //     var filteredparkSelected = document.getElementById('parkSelected');
+    //     parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
+    //         'ID: <b class="codes">' + park.value + '</b>';
+    // }
+    //     $(document).ready(function () {
+
+    // var createdisplay = function (data) {
+
+    //     $(".2").append("<h4>").text("Name: " + data.name);
+    //     $(".3").append("<h4>").text("Metacritic: " + data.metacritic);
+    //     $(".4").append("<h4>").text("Released: " + data.released);
+    //     $(".5").append("<h4>").text("Score: " + data.score);
+
+    //     genreNames = "";
+    //     var GenresList = data.genres;
+    //     for (; i < GenresList.length; i++) {
+    //         genreNames += GenresList[i].name + ", ";
+    //         console.log(GenresList[i].name);
+
+    //     };
+    //     $(".6").append("<h4>").text(genreNames);
+
+    // };
 
 
-});
+    // var searchGames = function (anything) {
+    //     anything.preventDefault();
+
+    //     var queryURL = "https://api.rawg.io/api/games?search=" + anything;
+
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET"
+    //     }).then(function (response) {
+    //         var Results = response.results[i];
+
+    //         console.log(Results);
+    //         createdisplay(Results);
+
+    //     });
+
+    // };
+
+    // searchGames;
+    // inputEl.e  = anything;
+
+    // $(".btn").on("click", searchGames);
+
+    // });
+
+    $(".list-group-item").on("click", function (event) {
+        let code = $(this).find(".codes").text();
+        if (event.target.matches()) {
+
+        }
+
+
+    });
 </script>
 
 </html>
