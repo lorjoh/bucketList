@@ -59,34 +59,54 @@
                 <!-- <hr> -->
 
             </div>
-            <div class="col-sm-8">
-                <div class="row ml-2 border border-dark rounded">
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                    <hr> -->
+                <div class="col-sm-12" id="Park-info">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="activitySelected">
 
-                    <hr>
-                    <div class="col-sm-12" id="Park-info">
-                        <ul class="list-group">
-                            <li class="list-group-item" id="activitySelected">
+                        </li>
+                        <li class="list-group-item" id="topicSelected">
 
-                            </li>
-                            <li class="list-group-item" id="topicSelected">
+                        </li>
+                        <li class="list-group-item" id="parkSelected">
 
-                            </li>
-                            <li class="list-group-item" id="parkSelected">
+                        </li>
+                    </ul>
+                                   </div>
+                
 
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- <hr> -->
-                    <!-- <div class="row ml-2 border border-dark rounded"> -->
-                    <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
-                    <br>
-                    <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
-                        id="focus-on-item">focus</button>
-                    <!-- </div> -->
-                </div>
             </div>
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                            <hr> -->
+                <div class="col-sm-12" id="Park-info">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="activitySelected">
+
+                        </li>
+                        <li class="list-group-item" id="topicSelected">
+
+                        </li>
+                        <li class="list-group-item" id="parkSelected">
+
+                        </li>
+                    </ul>
+                </div>
+                <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
+                <br>
+                <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
+                    id="focus-on-item">focus</button>
+            </div>
+
+
+            <!-- <div class="row ml-2 border border-dark rounded"> -->
+            <!-- </div> -->
         </div>
+        <hr>
     </div>
+   
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -158,7 +178,7 @@
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var topicSelected = document.getElementById('topicSelected');
         topicSelected.innerHTML = 'Selected Topic: <b>' + topic.options[topic.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + topic.value + '</b>';
+            'ID: <b class="codes">' + topic.value + '</b>';
     }
 
 
@@ -220,7 +240,7 @@
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var activitySelected = document.getElementById('activitySelected');
         activitySelected.innerHTML = 'Selected Activity: <b>' + activity.options[activity.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + activity.value + '</b>';
+            'ID: <b class="codes">' + activity.value + '</b>';
     }
 
     // ***************************************************************************
@@ -245,7 +265,17 @@
         { "park_name": "Amistad National Recreation Area", "park_code": "amis" },
         { "park_name": "Anacostia Park", "park_code": "anac" },
         { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
-        { "park_name": "Zion National Park", "park_code": "zion" }]
+        { "park_name": "Zion National Park", "park_code": "zion" }];
+
+        var filteredParks = [{ "park_name": "Abraham Lincoln Birthplace National Historical Park", "park_code": "abli" },
+        { "park_name": "Acadia National Park", "park_code": "acad" },
+        { "park_name": "Adams National Historical Park", "park_code": "adam" },
+        { "park_name": "African American Civil War Memorial ", "park_code": "afam" },
+        { "park_name": "African Burial Ground National Monument", "park_code": "afbg" },
+        { "park_name": "Agate Fossil Beds National Monument", "park_code": "agfo" },
+        { "park_name": "Ala Kahakai National Historic Trail", "park_code": "alka" },
+        { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
+        { "park_name": "Zion National Park", "park_code": "zion" }];
 
         var park = document.getElementById('selectedPark');
         for (var i = 0; i < parks.length; i++) {
@@ -258,8 +288,9 @@
     function showPark(park) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var parkSelected = document.getElementById('parkSelected');
+        console.log(park, 'parkSelected');
         parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + park.value + '</b>';
+            'ID: <b class="codes">' + park.value + '</b>';
     }
 
 
@@ -267,6 +298,12 @@
     populateTopic()
     populateActivity()
 
+$(".list-group-item").on("click", function(){
+let code = $(this).find(".codes").text();
+console.log(code);
+
+
+});
 </script>
 
 </html>
