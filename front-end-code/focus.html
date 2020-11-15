@@ -14,74 +14,77 @@
 <body>
     <!--Jumbotron for Title-->
     <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;">
-        <h1> <strong>Let's Focus on Your National Park Picks</strong></h1>
+        <h1> <strong>Let's Focus on NATIONAL PARK NAME</strong></h1>
     </div>
     <div class="container">
-        <!--Row for searching a city-->
+        <!--Row for searching a park-->
         <div class="row">
-            <div class="col-sm-4 bg-light">
-                <!--Here we create an HTML form for handling the inputs-->
-                <h4 class="pt-1"><strong>Pick a park for more focus:</strong></h4>
-                <!--Here we create the text box for capturing the search city Name-->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control"id="search-city" aria-label="City Search" aria-describedby="search-button">
-                    <div class="input-group-append">
-                        <button class=" btn bg-primary text-light" id="search-button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-                <!--section for search city history-->
-                <button class=" btn btn-primary" type="button" id="clear-history">Clear history</button>
-                <ul class="list-group">
 
+
+            <div class="col-sm-3 bg-light">
+                <h4 class="pt-1"><strong>Activities at Your Park:</strong></h4>
+                <!--Here we create the list of activities at the park-->
+                <ul>
+                    <li>Activity 1</li>
+                    <li>Activity 2</li>
+                    <li>Activity 3</li>
                 </ul>
+                <h4 class="pt-1"><strong>Topics at Your Park:</strong></h4>
+                <!--Here we create the list of topics at the park-->
+                <ul>
+                    <li>Topic 1</li>
+                    <li>Topic 2</li>
+                    <li>Topic 3</li>
+                </ul>
+                <!--section for search park list-->
+                <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button>
             </div>   
-            <div class="col-sm-8">
-                <div class="row ml-2 border border-dark rounded">
-                    <div class="col-sm-12" id="current-weather">
-                        <h3 class="city-name mb-1 mt-2 bolder" id="current-city"></h3>
-                        <p>Park Name:<span class="current" id="temperature"></span></p>
-                        <p>Location:<span class="current" id="humidity"></span></p> 
-                        <p>Activities Available:<span class="current" id="wind-speed"></span></p>
-                        <p>History & Culture Topics Available:<span class="current bg-danger rounded py-2 px-2 text-white" id="uv-index"></span></p>
-                        <p>Park Website:<span class="current bg-danger rounded py-2 px-2 text-white" id="uv-index"></span></p> 
+
+
+
+            <div class="col-sm-9">
+                <div class="row ml-12 border border-dark rounded">
+                    <div class="col-sm-12" id="current-park">
+                        <h3 class="mb-1 mt-2 bolder" id="park-data"></h3>
+                        <p>Park Name: PARK NAME</p>
+                        <p>Park Description: PARK DESCRIPTION</p>
+                        <p>Location: PARK LOCATION</p> 
+                        <p>Park Website: PARK WEBSITE</p>
+                        <p>Park Phone Number: PARK PHONE NUMBER</p>
+                        <p>Park Email Address: PARK EMAIL ADDRESS</p>
                     </div>
                 </div>
-                <!--Row for future data to be dumped here-->
-                <h3>Photo of Your Park</h3>
-                <img src="https://npca.s3.amazonaws.com/images/10424/f5724240-0132-4e24-8744-ad063dd0b177-banner.jpg?1470332414" width="470px">
-                
-                <div class="col-sm-12" id ="future-weather">
-                    <h3>More Park Information:</h3>
-                    <div class="row text-light">
-                        <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                            <p id="fDate0"></p>
-                            <p id="fImg0"></p>
-                            <p>Click to Rate This Park:<span id="fTemp0"></span></p>
-                            <p>1 Lo, 5 Hi:<span id="fHumidity0"></span></p>
-                        </div>
-                        <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                            <p id="fDate1"></p>
-                            <p id="fImg1"></p>
-                            <p>Click to Make Notes About This Park<span id="fTemp1"></span></p>
-                        </div>
-                        <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
-                            <p id="fDate2"></p>
-                            <p id="fImg2"></p>
-                            <p>Click to View More Photos of This Park<span id="fTemp2"></span></p>
-                        </div>
-                        <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
-                            <p id="fDate3"></p>
-                            <p id="fImg3"></p>
-                            <p>Feature<span id="fTemp3"></span></p>
-                        </div>
-                        <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                            <p id="fDate4"></p>
-                            <p id="fImg4"></p>
-                            <p>Feature<span id="fTemp4"></span></p>
-                        </div>
+                <div>
+                    <h3>Photo of Your Park</h3>
+                    <img src="https://npca.s3.amazonaws.com/images/10424/f5724240-0132-4e24-8744-ad063dd0b177-banner.jpg?1470332414" width="470px">
+                </div>
+                <h4>More Park Information:</h4>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Click to Rate This Park:</p>
+                        <p>1 Lo, 5 Hi:</p>
                     </div>
                 </div>
-                
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Click to Make Notes About This Park</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p>Click to View More Photos of This Park</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p>Things You'd Like to Do</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Plan Your Travel</p>
+                    </div>
+                </div>   
             </div>
         </div>
     </div>
