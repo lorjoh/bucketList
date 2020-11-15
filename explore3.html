@@ -116,7 +116,7 @@
                 <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
 
                 <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
-                    id="focus-on-item">focus</button>
+                    id="focus-on-park">focus</button>
             </div>
 
 
@@ -343,18 +343,31 @@
             }
         };
 
+        var chosenParkCode 
+
+        function saveParkCode(parkCode){
+        localStorage.chosenParkCode =  parkCode;
+        }
+
         function showFilteredPark(filteredPark) {
             $("#finalParkSelection").empty();
             // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
             var filteredParkSelected = document.getElementById('selectedFilteredPark');
             let parkChoice = filteredPark.options[filteredPark.selectedIndex].text 
-            selectedFilteredPark.innerHTML = 'Selected Filtered Park: <b>' + 
-                parkChoice + '</b> </br>' +
-                'ID: <b class="codes">' + filteredPark.value + '</b>';
+
+            // selectedFilteredPark.innerHTML = 'Selected Filtered Park: <b>' + 
+            //     parkChoice + '</b> </br>' +
+            //     'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
+            selectedFilteredPark.innerHTML = 'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
                 console.log(selectedFilteredPark.innerHTML);
+            let chosenParkCode = selectedFilteredPark.innerHTML.slice(8);
             let displayPark = 'Park Chosen: ' +  '</b> </br>' + parkChoice;
 
             $('#finalParkSelection').append(displayPark);
+
+            console.log('Park Choice Code: ' + chosenParkCode)
+            console.log('Park Choice Name: ' + parkChoice)
+            saveParkCode(chosenParkCode);
 
             //    event.preventDefault();
         };
@@ -392,16 +405,22 @@ console.log("Park = " + code);
 populateFilteredParks()
 });
 
-// $("#focus-on-item").on("click", function(){
-// let chosenPark = $(this).find(".codes").text();
-// console.log("focus-on-item = " + code);
+$("#focus-on-park").on("click", function(){
+// let code = $(this).find(".codes").text();
+// console.log("Park Chosen  = " + chosenParkCode);
+// populateFilteredParks()
+getParkInfo()
+});
 
-// function getSelectedParkInfo()
+// $('#focus-on-park').on("click", function(){
+
+// getSelectedParkInfo()
 
 // });
 
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src= "./focus.js"></script>
+<script src= "./apiCalls.js"></script>
+<script src= "./apiCalls.js"></script>
 
 </html>
