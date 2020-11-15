@@ -1,0 +1,40 @@
+
+
+let name = acadia.data[0].fullName
+
+let _topics =acadia.data[0].topics
+
+let _activities =acadia.data[0].activities
+
+let url = acadia.data[0].url
+
+let parkDesc = acadia.data[0].description
+
+let parkCity = acadia.data[0].addresses[0].city
+
+let parkState = acadia.data[0].addresses[0].stateCode
+
+let parkPhone = acadia.data[0].contacts.phoneNumbers[0].phoneNumber
+
+let parkEmail = acadia.data[0].contacts.emailAddresses[0].emailAddress
+
+let photo1 = acadia.data[0].images[0].url
+
+let photo2 = acadia.data[0].images[1].url
+
+let photo3 = acadia.data[0].images[2].url
+
+let photo4 = acadia.data[0].images[3].url
+
+let photo5 = acadia.data[0].images[4].url
+
+let acadia = [the object I sent you]
+
+
+
+
+
+
+
+
+
