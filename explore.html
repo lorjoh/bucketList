@@ -62,7 +62,7 @@
             <div class="col-sm-4">
                 <!-- <div class="row ml-2 border border-dark rounded">
                     <hr> -->
-                <div class="col-sm-12" id="Park-info">
+                <div class="col-sm-12">
                     <ul class="list-group">
                         <li class="list-group-item" id="activitySelected">
 
@@ -86,7 +86,7 @@
                         Filtered Parks
                     </button>
                     <button type="button" class="btn btn-primary">
-                        <select class="custom-select" id="queriedPark" onchange="showfilteredPark(this)">
+                        <select class="custom-select" id="queriedPark" onchange="focusPark(this)">
                             <option value="">-- Select a Park--</option>
                         </select>
                     </button>
@@ -111,6 +111,13 @@
 
 </body>
 <script>
+    var i = 0;
+    var activityItem = "";
+    var topicItem = "";
+    var parkItem = "";
+    var filteredParks = [];
+    console.log(filteredParks);
+
     function populateTopic() {
         // THE JSON ARRAY.
         var topics = [{ "topic_code": "28AEAE85-9DDA-45B6-981B-1CFCDCC61E14", "topic_name": "African American Heritage" },
@@ -282,89 +289,105 @@
             'ID: <b class="codes">' + park.value + '</b>';
     }
 
-    function populateFilteredParks() {
-        var filteredParks = [{ "park_name": "Abraham Lincoln Birthplace National Historical Park", "park_code": "abli" },
-        { "park_name": "Acadia National Park", "park_code": "acad" },
-        { "park_name": "Adams National Historical Park", "park_code": "adam" },
-        { "park_name": "African American Civil War Memorial ", "park_code": "afam" },
-        { "park_name": "African Burial Ground National Monument", "park_code": "afbg" },
-        { "park_name": "Agate Fossil Beds National Monument", "park_code": "agfo" },
-        { "park_name": "Ala Kahakai National Historic Trail", "park_code": "alka" },
-        { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
-        { "park_name": "Zion National Park", "park_code": "zion" }];
 
+
+    function populateFilteredParks() {
         var filteredPark = document.getElementById('queriedPark');
         for (var i = 0; i < filteredParks.length; i++) {
             // POPULATE SELECT ELEMENT WITH JSON.
             filteredPark.innerHTML = filteredPark.innerHTML +
-                '<option value="' + filteredParks[i]['park_code'] + '">' + filteredParks[i]['park_name'] + '</option>';
+                '<option value="' + [i] + '">' + filteredParks[i] + '</option>';
         }
     }
+
+    // //    Doug's page
+    // function focusPark(filteredPark) {
+    //     // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+    //     var parkQueried = document.getElementById('what doug calls this');
+    //     parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
+    //         'ID: <b class="codes">' + park.value + '</b>';
+    // }
+
     populatePark()
     populateTopic()
     populateActivity()
     populateFilteredParks()
 
-    // function showfilteredPark(park) {
-    //     // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
-    //     var filteredparkSelected = document.getElementById('parkSelected');
-    //     parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
-    //         'ID: <b class="codes">' + park.value + '</b>';
-    // }
-    //     $(document).ready(function () {
 
-    // var createdisplay = function (data) {
-
-    //     $(".2").append("<h4>").text("Name: " + data.name);
-    //     $(".3").append("<h4>").text("Metacritic: " + data.metacritic);
-    //     $(".4").append("<h4>").text("Released: " + data.released);
-    //     $(".5").append("<h4>").text("Score: " + data.score);
-
-    //     genreNames = "";
-    //     var GenresList = data.genres;
-    //     for (; i < GenresList.length; i++) {
-    //         genreNames += GenresList[i].name + ", ";
-    //         console.log(GenresList[i].name);
-
-    //     };
-    //     $(".6").append("<h4>").text(genreNames);
-
-    // };
-
-
-    // var searchGames = function (anything) {
-    //     anything.preventDefault();
-
-    //     var queryURL = "https://api.rawg.io/api/games?search=" + anything;
-
-    //     $.ajax({
-    //         url: queryURL,
-    //         method: "GET"
-    //     }).then(function (response) {
-    //         var Results = response.results[i];
-
-    //         console.log(Results);
-    //         createdisplay(Results);
-
-    //     });
-
-    // };
-
-    // searchGames;
-    // inputEl.e  = anything;
-
-    // $(".btn").on("click", searchGames);
-
-    // });
-
-    $(".list-group-item").on("click", function (event) {
+    // match the item to push Item name to search function       
+    $("#activitySelected").on("click", function () {
         let code = $(this).find(".codes").text();
-        if (event.target.matches()) {
-
-        }
-
-
+        console.log("Activity = " + code);
+        activityItem = code;
+        searchActivity;
     });
+    $("#topicSelected").on("click", function () {
+        let code = $(this).find(".codes").text();
+        console.log("Topic = " + code);
+        topicItem = code;
+        searchTopic;
+    });
+    $("#parkSelected").on("click", function (event) {
+        let code = $(this).find(".codes").text();
+        parkItem = code;
+        console.log(parkItem);
+        searchPark;
+        console.log("Park = " + code);
+    });
+
+    // display api response in filteredParks variable
+    var createparkNames = function (data) {
+        var parkNames = "";
+        var pnsList = data.parks[i];
+        for (; i < pnsList.length; i++) {
+            parkNames += "'" + pnsList[i].name + "'" + ", ";
+            console.log(pnsList[i].name);
+        };
+        filteredParks = parkNames;
+    }
+
+    var apiKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+
+    var searchActivity = function (activityItem) {
+        var activityURL = "https://developer.nps.gov/api/v1/activities/parks?id=" + activityItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: activityURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            createparkNames(results);
+            // console.log(results);
+        });
+    };
+    searchActivity(activityItem);
+
+    var searchTopic = function (topicItem) {
+        var topicURL = "https://developer.nps.gov/api/v1/topics/parks?id=" + topicItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: topicURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            createparkNames(results);
+        });
+    };
+    searchTopic(topicItem);
+
+    var searchPark = function (parkItem) {
+        var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode=" + parkItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: parkURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            var pkName = results.name;
+            filteredParks = "'" + pkName + "'";
+        });
+    };
+    searchPark(parkItem);
 </script>
 
 </html>
