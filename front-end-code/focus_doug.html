@@ -25,14 +25,11 @@
 
 
             <div class="col-sm-3 bg-light">
-                <h4 class="pt-1"><strong>Activities at Your Park:</strong></h4>
+                <h4 class="pt-1" id = activitiesHed></h4>
                 <!--Here we create the list of activities at the park-->
-                <ul>
-                    <li>Activity 1</li>
-                    <li>Activity 2</li>
-                    <li>Activity 3</li>
-                </ul>
-                <h4 class="pt-1"><strong>Topics at Your Park:</strong></h4>
+                <p id = activitiesList></p>
+
+                <h4 class="pt-1" id = topicsHed></h4>
                 <!--Here we create the list of topics at the park-->
                 <ul>
                     <li>Topic 1</li>
@@ -49,7 +46,10 @@
                
                 <div>
                     <h3 id = photoHed></h3>
-                    <img src="https://npca.s3.amazonaws.com/images/10424/f5724240-0132-4e24-8744-ad063dd0b177-banner.jpg?1470332414" width="470px">
+                    <div id=photo1></div>
+                    <p id = photoCredit1></p>
+                    <h4 id = photoTitle1></h4>
+                    <p id = caption1></p>
                     <br>
                     <br>                
                 </div>
@@ -66,8 +66,8 @@
                     </div>
                 </div>
                 
-                                
-                
+                <br>                
+                <br>
                 <h4>More Park Information:</h4>
                 <div class="row text-light">
                     <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
@@ -569,7 +569,7 @@ let acadia = {
 }
 
 let parkName = acadia.data[0].fullName;
-$('#header').append("Let's Focus on " + parkName);
+$('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
 $('#parkName').append("Park Name: " + parkName);
 $('#location').append("Location: " + acadia.data[0].addresses[0].city +", " + acadia.data[0].addresses[0].stateCode);
 $('#description').append("Description: " + acadia.data[0].description);
@@ -578,6 +578,16 @@ $('#phoneNumber').append("Telephone " + acadia.data[0].contacts.phoneNumbers[0].
 $('#parkEmail').append("Park Email: " + acadia.data[0].contacts.emailAddresses[0].emailAddress);
 let shortName = acadia.data[0].name;
 $('#photoHed').append("Photo From " + shortName);
+$('#caption1').append(acadia.data[0].images[0].caption);
+$('#photo1').append("<img src='" + acadia.data[0].images[0].url + "' width='100%'>");
+$('#photoCredit1').append(acadia.data[0].images[0].credit);
+$('#photoTitle1').append(acadia.data[0].images[0].title);
+$('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
+$('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
+
+var i;
+for (i = 0; i < acadia.data[0].activities.length)
+
 
 
 </script>
