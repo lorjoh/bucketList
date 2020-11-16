@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.set('port', (process.env.PORT || 3300));
+app.set('port', (process.env.PORT || 3500));
 
 var people1 = ['John', 'Sara', 'Paul'];
 
