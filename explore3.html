@@ -196,14 +196,13 @@
     function showTopic(topic) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var topicSelected = document.getElementById('topicSelected');
-        topicSelected.innerHTML = 'Selected Topic: <b>' + topic.options[topic.selectedIndex].text + '</b> </br>' +
-            'ID: <b class="codes">' + topic.value + '</b>';
+        topicSelected.innerHTML = 'Selected Topic: <br><b>' + topic.options[topic.selectedIndex].text ;
     }
 
 
     // ***************************************************************************
     // Activity block
-
+    let activitySelectedCode =""
     function populateActivity() {
         // THE JSON ARRAY.
         var activities = [{ "activity_code": "09DF0950-D319-4557-A57E-04CD2F63FF42", "activity_name": "Arts and Culture" },
@@ -258,9 +257,13 @@
     function showActivity(activity) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var activitySelected = document.getElementById('activitySelected');
-        activitySelected.innerHTML = 'Selected Activity: <b>' + activity.options[activity.selectedIndex].text + '</b> </br>' +
-            'ID: <b class="codes">' + activity.value + '</b>';
-    }
+        activitySelected.innerHTML = 'Selected Activity: <br><b>' + activity.options[activity.selectedIndex].text;
+        console.log(activity.value)
+        activitySelectedCode=activity.value
+        console.log(activitySelectedCode);
+        localStorage.activitySelected=activity.value  
+    
+        }
 
     // ***************************************************************************
     // Parkblock
@@ -299,40 +302,64 @@
             // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
             var parkSelected = document.getElementById('parkSelected');
             console.log(park, 'parkSelected');
-            parkSelected.innerHTML = 'Selected Park: <b>' + 
-                park.options[park.selectedIndex].text + '</b> </br>' +
-                'ID: <b class="codes">' + park.value + '</b>';
+            parkSelected.innerHTML = 'Selected Park: <br><b>' + 
+                park.options[park.selectedIndex].text;
         };
 
     // ***************************************************************************
     // filteredParkblock
 
-        // var filteredPark = document.getElementById('finalSelectedPark');
-        //     for (var i = 0; i < parks.length; i++) {
-        //         // POPULATE SELECT ELEMENT WITH JSON.
-        //         park.innerHTML = park.innerHTML +
-        //             '<option value="' + filteredParks[i]['code'] + '">' + filteredParks[i]['name'] + '</option>';
-        //     };
-        
-        // function showFilteredPark(park) {
-        // // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
-        // var parkSelected = document.getElementById('finalSelectedPark');
-        // console.log(park, 'finalSelectedPark');
-        // parkSelected.innerHTML = 'Selected Park: <b>' + filteredPark.options[filteredPark.selectedIndex].text + '</b> </br>' +
-        //     'ID: <b class="codes">' + filteredPark.value + '</b>';
-        // }
+        var filteredParks="";
 
         function populateFilteredParks() {
         // THE JSON ARRAY.
         $("#selectedFilteredPark").empty();
-        var filteredParks = [
-        {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
-        {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
-        "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
+        
+        filteredParks = JSON.parse(localStorage.filteredParks)
+
+        console.log('using park JSON: ' + filteredParks)
+        // filteredParks = [
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
+        // {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
+        // "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
+
+
+        // filteredParks = [{"states":"KY","fullName":"Abraham Lincoln Birthplace National Historical Park","url":"https://www.nps.gov/abli/index.htm","parkCode":"abli","designation":"National Historical Park","name":"Abraham Lincoln Birthplace"},
+        // {"states":"ME","fullName":"Acadia National Park","url":"https://www.nps.gov/acad/index.htm","parkCode":"acad","designation":"National Park","name":"Acadia"},
+        // {"states":"NE","fullName":"Agate Fossil Beds National Monument","url":"https://www.nps.gov/agfo/index.htm","parkCode":"agfo","designation":"National Monument","name":"Agate Fossil Beds"},
+        // {"states":"PA","fullName":"Allegheny Portage Railroad National Historic Site","url":"https://www.nps.gov/alpo/index.htm","parkCode":"alpo","designation":"National Historic Site","name":"Allegheny Portage Railroad"},
+        // {"states":"VA","fullName":"Appomattox Court House National Historical Park","url":"https://www.nps.gov/apco/index.htm","parkCode":"apco","designation":"National Historical Park","name":"Appomattox Court House"},
+        // {"states":"CT,GA,MA,MD,ME,NC,NH,NJ,NY,PA,TN,VA,VT,WV","fullName":"Appalachian National Scenic Trail","url":"https://www.nps.gov/appa/index.htm","parkCode":"appa","designation":"National Scenic Trail","name":"Appalachian"},
+        // {"states":"UT","fullName":"Arches National Park","url":"https://www.nps.gov/arch/index.htm","parkCode":"arch","designation":"National Park","name":"Arches"},
+        // {"states":"MD,VA","fullName":"Assateague Island National Seashore","url":"https://www.nps.gov/asis/index.htm","parkCode":"asis","designation":"National Seashore","name":"Assateague Island"},
+        // {"states":"SD","fullName":"Badlands National Park","url":"https://www.nps.gov/badl/index.htm","parkCode":"badl","designation":"National Park","name":"Badlands"},
+        // {"states":"NM","fullName":"Bandelier National Monument","url":"https://www.nps.gov/band/index.htm","parkCode":"band","designation":"National Monument","name":"Bandelier"},
+        // {"states":"TX","fullName":"Big Bend National Park","url":"https://www.nps.gov/bibe/index.htm","parkCode":"bibe","designation":"National Park","name":"Big Bend"},
+        // {"states":"MT,WY","fullName":"Bighorn Canyon National Recreation Area","url":"https://www.nps.gov/bica/index.htm","parkCode":"bica","designation":"National Recreation Area","name":"Bighorn Canyon"},
+        // {"states":"FL","fullName":"Big Cypress National Preserve","url":"https://www.nps.gov/bicy/index.htm","parkCode":"bicy","designation":"National Preserve","name":"Big Cypress"},
+        // {"states":"KY,TN","fullName":"Big South Fork National River & Recreation Area","url":"https://www.nps.gov/biso/index.htm","parkCode":"biso","designation":"National River & Recreation Area","name":"Big South Fork"},
+        // {"states":"NC","fullName":"Blue Ridge National Heritage Area","url":"https://www.nps.gov/blrn/index.htm","parkCode":"blrn","designation":"National Heritage Area","name":"Blue Ridge"},
+        // {"states":"UT","fullName":"Bryce Canyon National Park","url":"https://www.nps.gov/brca/index.htm","parkCode":"brca","designation":"National Park","name":"Bryce Canyon"},
+        // {"states":"NC","fullName":"Cape Hatteras National Seashore","url":"https://www.nps.gov/caha/index.htm","parkCode":"caha","designation":"National Seashore","name":"Cape Hatteras"},
+        // {"states":"UT","fullName":"Canyonlands National Park","url":"https://www.nps.gov/cany/index.htm","parkCode":"cany","designation":"National Park","name":"Canyonlands"},
+        // {"states":"UT","fullName":"Capitol Reef National Park","url":"https://www.nps.gov/care/index.htm","parkCode":"care","designation":"National Park","name":"Capitol Reef"},
+        // {"states":"NM","fullName":"Carlsbad Caverns National Park","url":"https://www.nps.gov/cave/index.htm","parkCode":"cave","designation":"National Park","name":"Carlsbad Caverns"},
+        // {"states":"NM","fullName":"Capulin Volcano National Monument","url":"https://www.nps.gov/cavo/index.htm","parkCode":"cavo","designation":"National Monument","name":"Capulin Volcano"},
+        // ]
+        // "[
+        // {"states":"UT","fullName":"Arches National Park","url":"https://www.nps.gov/arch/index.htm","parkCode":"arch","designation":"National Park","name":"Arches"},
+        // {"states":"UT","fullName":"Capitol Reef National Park","url":"https://www.nps.gov/care/index.htm","parkCode":"care","designation":"National Park","name":"Capitol Reef"},
+        // {"states":"CA,NV","fullName":"Death Valley National Park","url":"https://www.nps.gov/deva/index.htm","parkCode":"deva","designation":"National Park","name":"Death Valley"},
+        // {"states":"AK","fullName":"Wrangell - St Elias National Park & Preserve","url":"https://www.nps.gov/wrst/index.htm","parkCode":"wrst","designation":"National Park & Preserve","name":"Wrangell - St Elias"},
+        // {"states":"UT","fullName":"Zion National Park","url":"https://www.nps.gov/zion/index.htm","parkCode":"zion","designation":"National Park","name":"Zion"}]"
+
+
+
+
 
         
         let filteredPark = document.getElementById('selectedFilteredPark');
@@ -389,8 +416,9 @@ console.log(code);
 
 $("#activitySelected").on("click", function(){
 let code = $(this).find(".codes").text();
-console.log("Activity = " + code);
-populateFilteredParks()
+// console.log("Activity = " + code);
+getParksFromActivities()
+// populateFilteredParks()
 });
 
 $("#topicSelected").on("click", function(){
@@ -410,6 +438,11 @@ $("#focus-on-park").on("click", function(){
 // console.log("Park Chosen  = " + chosenParkCode);
 // populateFilteredParks()
 getParkInfo()
+});
+
+$("#clear-search").on("click", function(){
+
+    $("#finalParkSelection").empty();
 });
 
 // $('#focus-on-park').on("click", function(){
