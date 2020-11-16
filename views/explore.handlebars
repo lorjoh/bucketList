@@ -7,21 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Explore Page</title>
     <!--Bootstrap CSS CDN-->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    {{!-- <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" /> --}}
     <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css"> --}}
 </head>
 
 <body>
     <!--Jumbotron for Title-->
     <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;">
-        <h1> <strong>Let's Explore our National Parks!!!!!!</strong></h1>
+        <h1>Let's Explore our National Parks !</h1>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 bg-light">
+            <div class="col-sm-4 bg-grey">
 
                 <div class="btn-group dropright">
                     <button type="button" class="btn btn-primary">
@@ -193,17 +193,21 @@
         }
     }
 
+    // let topicSelectedCode="";
     function showTopic(topic) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var topicSelected = document.getElementById('topicSelected');
-        topicSelected.innerHTML = 'Selected Topic: <b>' + topic.options[topic.selectedIndex].text + '</b> </br>' +
-            'ID: <b class="codes">' + topic.value + '</b>';
-    }
+        topicSelected.innerHTML = 'Selected Topic: <br><b>' + topic.options[topic.selectedIndex].text;
+        console.log('showing topic: ' + topic.value);
+        console.log(topic.value);
+        localStorage.topicSelected=topic.value  
+    
+        }
 
 
     // ***************************************************************************
     // Activity block
-
+    let activitySelectedCode =""
     function populateActivity() {
         // THE JSON ARRAY.
         var activities = [{ "activity_code": "09DF0950-D319-4557-A57E-04CD2F63FF42", "activity_name": "Arts and Culture" },
@@ -258,9 +262,13 @@
     function showActivity(activity) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var activitySelected = document.getElementById('activitySelected');
-        activitySelected.innerHTML = 'Selected Activity: <b>' + activity.options[activity.selectedIndex].text + '</b> </br>' +
-            'ID: <b class="codes">' + activity.value + '</b>';
-    }
+        activitySelected.innerHTML = 'Selected Activity: <br><b>' + activity.options[activity.selectedIndex].text;
+        console.log(activity.value)
+        activitySelectedCode=activity.value
+        console.log(activitySelectedCode);
+        localStorage.activitySelected=activity.value  
+    
+        }
 
     // ***************************************************************************
     // Parkblock
@@ -299,40 +307,32 @@
             // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
             var parkSelected = document.getElementById('parkSelected');
             console.log(park, 'parkSelected');
-            parkSelected.innerHTML = 'Selected Park: <b>' + 
-                park.options[park.selectedIndex].text + '</b> </br>' +
-                'ID: <b class="codes">' + park.value + '</b>';
+            parkSelected.innerHTML = 'Selected Park: <br><b>' + 
+                park.options[park.selectedIndex].text;
+            localStorage.parkSelected=park.value
+            localStorage.parkSelectedName=park.options[park.selectedIndex].text 
         };
 
     // ***************************************************************************
     // filteredParkblock
 
-        // var filteredPark = document.getElementById('finalSelectedPark');
-        //     for (var i = 0; i < parks.length; i++) {
-        //         // POPULATE SELECT ELEMENT WITH JSON.
-        //         park.innerHTML = park.innerHTML +
-        //             '<option value="' + filteredParks[i]['code'] + '">' + filteredParks[i]['name'] + '</option>';
-        //     };
-        
-        // function showFilteredPark(park) {
-        // // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
-        // var parkSelected = document.getElementById('finalSelectedPark');
-        // console.log(park, 'finalSelectedPark');
-        // parkSelected.innerHTML = 'Selected Park: <b>' + filteredPark.options[filteredPark.selectedIndex].text + '</b> </br>' +
-        //     'ID: <b class="codes">' + filteredPark.value + '</b>';
-        // }
+        var filteredParks="";
 
         function populateFilteredParks() {
         // THE JSON ARRAY.
         $("#selectedFilteredPark").empty();
-        var filteredParks = [
-        {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
-        {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
-        "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
+        
+        filteredParks = JSON.parse(localStorage.filteredParks)
+
+        // console.log('using park JSON: ' + filteredParks)
+        // filteredParks = [
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
+        // {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
+        // "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
 
         
         let filteredPark = document.getElementById('selectedFilteredPark');
@@ -345,24 +345,42 @@
 
         var chosenParkCode 
 
+        function saveParkCode(parkCode){
+        localStorage.chosenParkCode =  parkCode;
+        }
+
         function showFilteredPark(filteredPark) {
             $("#finalParkSelection").empty();
             // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
             var filteredParkSelected = document.getElementById('selectedFilteredPark');
             let parkChoice = filteredPark.options[filteredPark.selectedIndex].text 
+
             // selectedFilteredPark.innerHTML = 'Selected Filtered Park: <b>' + 
             //     parkChoice + '</b> </br>' +
             //     'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
             selectedFilteredPark.innerHTML = 'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
                 console.log(selectedFilteredPark.innerHTML);
+            let chosenParkCode = selectedFilteredPark.innerHTML.slice(8);
             let displayPark = 'Park Chosen: ' +  '</b> </br>' + parkChoice;
 
             $('#finalParkSelection').append(displayPark);
 
-            console.log(parkChoice)
+            console.log('Park Choice Code: ' + chosenParkCode)
+            console.log('Park Choice Name: ' + parkChoice)
+            saveParkCode(chosenParkCode);
 
             //    event.preventDefault();
         };
+
+ 
+
+
+
+
+
+
+
+
 
 
     // ***************************************************************************
@@ -381,26 +399,34 @@ console.log(code);
 
 $("#activitySelected").on("click", function(){
 let code = $(this).find(".codes").text();
-console.log("Activity = " + code);
-populateFilteredParks()
+// console.log("Activity = " + code);
+getParksFromActivities()
+// populateFilteredParks()
 });
 
 $("#topicSelected").on("click", function(){
 let code = $(this).find(".codes").text();
-console.log("Topic = " + code);
-populateFilteredParks()
+console.log("Topic listener fired");
+getParksFromTopics()
+// populateFilteredParks()
 });
 
 $("#parkSelected").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log("Park = " + code);
-populateFilteredParks()
+    $("#finalParkSelection").empty()
+    let displayPark = 'Park Chosen: ' +  '</b> </br>' + localStorage.parkSelectedName;
+    $('#finalParkSelection').append(displayPark)
 });
 
 $("#focus-on-park").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log("Park Chosen  = " + chosenParkCode);
+// let code = $(this).find(".codes").text();
+// console.log("Park Chosen  = " + chosenParkCode);
 // populateFilteredParks()
+getParkInfo()
+});
+
+$("#clear-search").on("click", function(){
+
+    $("#finalParkSelection").empty();
 });
 
 // $('#focus-on-park').on("click", function(){
@@ -411,6 +437,7 @@ console.log("Park Chosen  = " + chosenParkCode);
 
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src= "./focus.js"></script>
+<script src= "./apiCalls.js"></script>
+<script src= "./apiCalls.js"></script>
 
 </html>

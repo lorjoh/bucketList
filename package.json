@@ -1,0 +1,15 @@
+{
+  "name": "bucket_list",
+  "version": "1.0.0",
+  "description": "National Park Bucket List maker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "*",
+    "express-handlebars": "*"
+  },
+  "author": "FHS, DD, SMA",
+  "license": "ISC"
+}
