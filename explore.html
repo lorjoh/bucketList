@@ -59,34 +59,51 @@
                 <!-- <hr> -->
 
             </div>
-            <div class="col-sm-8">
-                <div class="row ml-2 border border-dark rounded">
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                    <hr> -->
+                <div class="col-sm-12">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="activitySelected">
 
-                    <hr>
-                    <div class="col-sm-12" id="Park-info">
-                        <ul class="list-group">
-                            <li class="list-group-item" id="activitySelected">
+                        </li>
+                        <li class="list-group-item" id="topicSelected">
 
-                            </li>
-                            <li class="list-group-item" id="topicSelected">
+                        </li>
+                        <li class="list-group-item" id="parkSelected">
 
-                            </li>
-                            <li class="list-group-item" id="parkSelected">
-
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- <hr> -->
-                    <!-- <div class="row ml-2 border border-dark rounded"> -->
-                    <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
-                    <br>
-                    <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
-                        id="focus-on-item">focus</button>
-                    <!-- </div> -->
+                        </li>
+                    </ul>
                 </div>
+                <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
+
             </div>
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                            <hr> -->
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Filtered Parks
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class="custom-select" id="queriedPark" onchange="focusPark(this)">
+                            <option value="">-- Select a Park--</option>
+                        </select>
+                    </button>
+                </div>
+                <p>Select a Park and click the Focus Button</Select></p>
+                <hr>
+                <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
+                    id="focus-on-item">Focus</button>
+            </div>
+
+
+            <!-- <div class="row ml-2 border border-dark rounded"> -->
+            <!-- </div> -->
         </div>
+        <hr>
     </div>
+
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -94,6 +111,13 @@
 
 </body>
 <script>
+    var i = 0;
+    var activityItem = "";
+    var topicItem = "";
+    var parkItem = "";
+    var filteredParks = [];
+    console.log(filteredParks);
+
     function populateTopic() {
         // THE JSON ARRAY.
         var topics = [{ "topic_code": "28AEAE85-9DDA-45B6-981B-1CFCDCC61E14", "topic_name": "African American Heritage" },
@@ -158,7 +182,7 @@
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var topicSelected = document.getElementById('topicSelected');
         topicSelected.innerHTML = 'Selected Topic: <b>' + topic.options[topic.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + topic.value + '</b>';
+            'ID: <b class="codes">' + topic.value + '</b>';
     }
 
 
@@ -220,7 +244,7 @@
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var activitySelected = document.getElementById('activitySelected');
         activitySelected.innerHTML = 'Selected Activity: <b>' + activity.options[activity.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + activity.value + '</b>';
+            'ID: <b class="codes">' + activity.value + '</b>';
     }
 
     // ***************************************************************************
@@ -245,7 +269,9 @@
         { "park_name": "Amistad National Recreation Area", "park_code": "amis" },
         { "park_name": "Anacostia Park", "park_code": "anac" },
         { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
-        { "park_name": "Zion National Park", "park_code": "zion" }]
+        { "park_name": "Zion National Park", "park_code": "zion" }];
+
+
 
         var park = document.getElementById('selectedPark');
         for (var i = 0; i < parks.length; i++) {
@@ -253,20 +279,115 @@
             park.innerHTML = park.innerHTML +
                 '<option value="' + parks[i]['park_code'] + '">' + parks[i]['park_name'] + '</option>';
         }
+
     }
 
     function showPark(park) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
         var parkSelected = document.getElementById('parkSelected');
         parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + park.value + '</b>';
+            'ID: <b class="codes">' + park.value + '</b>';
     }
 
+
+
+    function populateFilteredParks() {
+        var filteredPark = document.getElementById('queriedPark');
+        for (var i = 0; i < filteredParks.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            filteredPark.innerHTML = filteredPark.innerHTML +
+                '<option value="' + [i] + '">' + filteredParks[i] + '</option>';
+        }
+    }
+
+    // //    Doug's page
+    // function focusPark(filteredPark) {
+    //     // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+    //     var parkQueried = document.getElementById('what doug calls this');
+    //     parkSelected.innerHTML = 'Selected Park: <b>' + park.options[park.selectedIndex].text + '</b> </br>' +
+    //         'ID: <b class="codes">' + park.value + '</b>';
+    // }
 
     populatePark()
     populateTopic()
     populateActivity()
+    populateFilteredParks()
 
+
+    // match the item to push Item name to search function       
+    $("#activitySelected").on("click", function () {
+        let code = $(this).find(".codes").text();
+        console.log("Activity = " + code);
+        activityItem = code;
+        searchActivity;
+    });
+    $("#topicSelected").on("click", function () {
+        let code = $(this).find(".codes").text();
+        console.log("Topic = " + code);
+        topicItem = code;
+        searchTopic;
+    });
+    $("#parkSelected").on("click", function (event) {
+        let code = $(this).find(".codes").text();
+        parkItem = code;
+        console.log(parkItem);
+        searchPark;
+        console.log("Park = " + code);
+    });
+
+    // display api response in filteredParks variable
+    var createparkNames = function (data) {
+        var parkNames = "";
+        var pnsList = data.parks[i];
+        for (; i < pnsList.length; i++) {
+            parkNames += "'" + pnsList[i].name + "'" + ", ";
+            console.log(pnsList[i].name);
+        };
+        filteredParks = parkNames;
+    }
+
+    var apiKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+
+    var searchActivity = function (activityItem) {
+        var activityURL = "https://developer.nps.gov/api/v1/activities/parks?id=" + activityItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: activityURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            createparkNames(results);
+            // console.log(results);
+        });
+    };
+    searchActivity(activityItem);
+
+    var searchTopic = function (topicItem) {
+        var topicURL = "https://developer.nps.gov/api/v1/topics/parks?id=" + topicItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: topicURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            createparkNames(results);
+        });
+    };
+    searchTopic(topicItem);
+
+    var searchPark = function (parkItem) {
+        var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode=" + parkItem + "&api_key=" + apiKey;
+        $.ajax({
+            url: parkURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var results = response.data[i];
+            var pkName = results.name;
+            filteredParks = "'" + pkName + "'";
+        });
+    };
+    searchPark(parkItem);
 </script>
 
 </html>
