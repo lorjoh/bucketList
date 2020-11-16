@@ -4,6 +4,11 @@
 var parkResponse="";
 var savedParkInfo="";
 
+
+// *********************************************************************************************
+// function to retrieve detailed Park information for Focus page 
+
+
 function getParkInfo() {
 
 let parkSelected = localStorage.chosenParkCode;
@@ -26,6 +31,8 @@ console.log(parkURL);
         // Log the queryURL
         console.log(response);
         parkResponse = response;
+
+        
       });
   }
 
