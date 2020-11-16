@@ -58,14 +58,41 @@ console.log(parkURL);
           });
       }
 
+  function getParksFromTopics() {
+    // let topicSelectedCode = '28AEAE85-9DDA-45B6-981B-1CFCDCC61E14';
+    let topicSelected = localStorage.topicSelected;
+    console.log('calling park topic api')
+    console.log('using topic code: ' + topicSelected)
+    
+    let parkAPIKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+    
+    let parkURL ="https://developer.nps.gov/api/v1/topics/parks?id=" + topicSelected+ "&api_key=" +parkAPIKey; 
+    
+    console.log(parkURL);
+    
+        $.ajax({
+          url: parkURL,
+          method: "GET"
+        })
+          // We store all of the retrieved data inside of an object called "response"
+          .then(function(response) {
+            // Log the queryURL
+            console.log(response);
+            topicAPIResp = response;
+            localStorage.filteredParks = JSON.stringify(response.data[0].parks);
+            console.log(localStorage.filteredParks);
+            populateFilteredParks();
 
-  function getSavedParkInfo() {
+          });
+      }
+      // getParksFromTopics()
+  // function getSavedParkInfo() {
 
-    savedParkInfo = JSON.parse(localStorage.parkResponse);
+  //   savedParkInfo = JSON.parse(localStorage.parkResponse);
    
-   }
+  //  }
 
-getSavedParkInfo()
+// getSavedParkInfo()
 
 
 
