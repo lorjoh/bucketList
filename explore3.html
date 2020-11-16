@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Explore Page</title>
+    <!--Bootstrap CSS CDN-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+    <!--Jumbotron for Title-->
+    <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;">
+        <h1> <strong>Let's Explore our National Parks!!!!!!</strong></h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 bg-light">
+
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Activities
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class=" custom-select" id="selectedActivity" onchange="showActivity(this)">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </button>
+                </div>
+                <hr>
+
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Topics
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class="custom-select" id="selectedTopic" onchange="showTopic(this)">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </button>
+                </div>
+                <hr>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Parks
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class="custom-select" id="selectedPark" onchange="showPark(this)">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </button>
+                </div>
+                <!-- <hr> -->
+
+            </div>
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                    <hr> -->
+                <div class="col-sm-12" id="Park-info">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="activitySelected">
+
+                        </li>
+                        <li class="list-group-item" id="topicSelected">
+
+                        </li>
+                        <li class="list-group-item" id="parkSelected">
+
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="col-sm-4">
+                <!-- <div class="row ml-2 border border-dark rounded">
+                            <hr> -->
+                <!-- <div class="col-sm-12" id="Park-info">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="activitySelected">
+
+                        </li>
+                        <li class="list-group-item" id="topicSelected">
+
+                        </li>
+                        <li class="list-group-item" id="parkSelected">
+
+                        </li>
+                    </ul>
+                </div> -->
+
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary">
+                        Filtered Parks
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <select class="custom-select" id="selectedFilteredPark" 
+                        onchange="showFilteredPark(this)">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </button>
+                    <br>
+                </div>
+
+               
+                <br>
+               <div class="h4" id="finalParkSelection"></div>
+
+                <br>
+
+                <button class=" btn btn-primary" style="margin:5px" type="button" id="clear-search">Clear</button>
+
+                <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
+                    id="focus-on-park">focus</button>
+            </div>
+
+
+            <!-- <div class="row ml-2 border border-dark rounded"> -->
+            <!-- </div> -->
+        </div>
+        <hr>
+    </div>
+   
+    <!--jQuery JS-->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!--Code to Jvascript File-->
+
+</body>
+<script>
+    function populateTopic() {
+        // THE JSON ARRAY.
+        var topics = [{ "topic_code": "28AEAE85-9DDA-45B6-981B-1CFCDCC61E14", "topic_name": "African American Heritage" },
+        { "topic_code": "F3883A66-A7CB-461B-868E-1B5932224B25", "topic_name": "American Revolution" },
+        { "topic_code": "FB3641FE-67A3-4EC7-B9C4-0A0867776798", "topic_name": "Ancient Seas" },
+        { "topic_code": "0D00073E-18C3-46E5-8727-2F87B112DDC6", "topic_name": "Animals" },
+        { "topic_code": "7F81A0CB-B91F-4896-B9A5-41BE9A54A27B", "topic_name": "Archeology" },
+        { "topic_code": "69693007-2DF2-4EDE-BB3B-A25EBA72BDF5", "topic_name": "Architecture and Building" },
+        { "topic_code": "77B7EFDF-1A74-409C-8BA2-324EC919DB0E", "topic_name": "Arctic" },
+        { "topic_code": "00F3C3F9-2D67-4802-81AE-CCEA5D3BA370", "topic_name": "Arts" },
+        { "topic_code": "227D2677-28CA-4CBF-997F-61108975A497", "topic_name": "Asian American Heritage" },
+        { "topic_code": "B912363F-771C-4098-BA3A-938DF38A9D7E", "topic_name": "Aviation" }, { "topic_code": "FC27FD15-62AA-4662-A97F-8E2A1A7CDE35", "topic_name": "Banking" },
+        { "topic_code": "D10852A3-443C-4743-A5FA-6DD6D2A054B3", "topic_name": "Birthplace" },
+        { "topic_code": "607D41B0-F830-4C07-A557-BCEF880A3929", "topic_name": "Burial, Cemetery and Gravesite" },
+        { "topic_code": "7F12224B-217A-4B07-A4A2-636B1CE7F221", "topic_name": "Colonization and Settlement" },
+        { "topic_code": "1170EEB6-5070-4760-8E7D-FF1A98272FAD", "topic_name": "Commerce" },
+        { "topic_code": "DAAD7F5E-9112-45F2-9A27-DA51B639F27E", "topic_name": "Dams" },
+        { "topic_code": "FE005582-12C5-472C-8229-3CB004DB050E", "topic_name": "Engineering" },
+        { "topic_code": "D9FC6D14-F8C7-4EBA-86EA-DFD99B6BB4F5", "topic_name": "Enslavement" },
+        { "topic_code": "12EA2B56-17EC-410A-A10D-BFBA87A0669B", "topic_name": "Explorers and Expeditions" },
+        { "topic_code": "1F833C99-A75D-4F9E-9256-B96523485466", "topic_name": "Farming and  Agriculture" },
+        { "topic_code": "988B4AFC-F478-4673-B66D-E6BDB0CCFF35", "topic_name": "Forts" },
+        { "topic_code": "F12B6BDB-2FE9-4961-9DC2-59FEBC0990CD", "topic_name": "Great Depression" },
+        { "topic_code": "78078CA8-DCBC-4320-A7BF-259A56D55CA2", "topic_name": "Hispanic American Heritage" },
+        { "topic_code": "2B428F59-9148-40C1-B38E-130589F2540E", "topic_name": "Immigration" },
+        { "topic_code": "351EE154-87AA-46B0-BBA1-ED604368ACE9", "topic_name": "Incarceration" },
+        { "topic_code": "0B575E33-B68F-4F3D-998E-B03284606CF3", "topic_name": "Industry" },
+        { "topic_code": "14FA9FF3-7D86-4406-9A6D-BE9032A1C578", "topic_name": "Laborer and Worker" },
+        { "topic_code": "AF4F1CDF-E6C4-4886-BA91-8BC887DC2793", "topic_name": "Landscape Design" },
+        { "topic_code": "9FCC01C6-F068-4A05-9A78-23FEBFADAF56", "topic_name": "Latino American Heritage" },
+        { "topic_code": "E0AB480F-3A94-4DC1-8B21-9555F2C59B32", "topic_name": "LGBTQ American Heritage" },
+        { "topic_code": "4C9D4777-A9DA-47D1-A0B9-F4A3C98BC1B3", "topic_name": "Maritime" },
+        { "topic_code": "4B3CD083-7500-434B-A8C2-D355925E0245", "topic_name": "Medicine" },
+        { "topic_code": "69E16062-0E4F-4DE0-91FB-E4EDB2484572", "topic_name": "Migrations" },
+        { "topic_code": "3B0D607D-9933-425A-BFA0-21529AC4734C", "topic_name": "Military" },
+        { "topic_code": "BEB7E470-13B2-4E00-84B2-0402D98DAF69", "topic_name": "Monuments and Memorials" },
+        { "topic_code": "571E1597-4C6A-4814-A7E9-FC4EF8293CE8", "topic_name": "Music" },
+        { "topic_code": "A1BAF33E-EA84-4608-A888-4CEE9541F027", "topic_name": "Native American Heritage" },
+        { "topic_code": "272549CF-EAA4-4603-8E20-FBE1AAB391B7", "topic_name": "Pacific Islander Heritage" },
+        { "topic_code": "F669BC40-BDC4-41C0-9ACE-B2CD25373045", "topic_name": "Prestopic_codeents" },
+        { "topic_code": "BAA85463-A96E-4CF4-A260-290D195423DB", "topic_name": "Reconstruction" },
+        { "topic_code": "518B32FB-339D-4C52-B2C2-04BF406AA4B0", "topic_name": "Religion and Spirituality" },
+        { "topic_code": "3CDB67A9-1EAC-408D-88EC-F26FA35E90AF", "topic_name": "Schools and Education" },
+        { "topic_code": "D1CF31DE-AFED-412B-9425-DD1FD4CBB5C7", "topic_name": "Science, Technology and Innovation" },
+        { "topic_code": "40C0866A-3890-41A4-84CA-5935DEE181AE", "topic_name": "Social Movements" },
+        { "topic_code": "A160B3D9-1603-4D89-B82F-21FCAF9EEE3B", "topic_name": "Tragic Events" },
+        { "topic_code": "FE2C2613-B41E-4531-BC43-03EB6E45CBCF", "topic_name": "Transportation" },
+        { "topic_code": "846E5C56-E5AC-489C-B3BF-11F4C73F12C2", "topic_name": "Urban America" },
+        { "topic_code": "27BF8807-54EA-4A3D-B073-AA7AA361CD7E", "topic_name": "Wars and Conflicts" },
+        { "topic_code": "C9C749E3-39C3-45F7-BCC5-9A609E30AA05", "topic_name": "Westward Expansion" },
+        { "topic_code": "7DA81DAB-5045-4953-9C20-36590AD9FA95", "topic_name": "Women's History" }];
+
+        var topic = document.getElementById('selectedTopic');
+        for (var i = 0; i < topics.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            topic.innerHTML = topic.innerHTML +
+                '<option value="' + topics[i]['topic_code'] + '">' + topics[i]['topic_name'] + '</option>';
+        }
+    }
+
+    function showTopic(topic) {
+        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+        var topicSelected = document.getElementById('topicSelected');
+        topicSelected.innerHTML = 'Selected Topic: <br><b>' + topic.options[topic.selectedIndex].text ;
+    }
+
+
+    // ***************************************************************************
+    // Activity block
+    let activitySelectedCode =""
+    function populateActivity() {
+        // THE JSON ARRAY.
+        var activities = [{ "activity_code": "09DF0950-D319-4557-A57E-04CD2F63FF42", "activity_name": "Arts and Culture" },
+        { "activity_code": "13A57703-BB1A-41A2-94B8-53B692EB7238", "activity_name": "Astronomy" },
+        { "activity_code": "5F723BAD-7359-48FC-98FA-631592256E35", "activity_name": "Auto and ATV" },
+        { "activity_code": "7CE6E935-F839-4FEC-A63E-052B1DEF39D2", "activity_name": "Biking" },
+        { "activity_code": "071BA73C-1D3C-46D4-A53C-00D5602F7F0E", "activity_name": "Boating" },
+        { "activity_code": "A59947B7-3376-49B4-AD02-C0423E08C5F7", "activity_name": "Camping" },
+        { "activity_code": "07CBCA6A-46B8-413F-8B6C-ABEDEBF9853E", "activity_name": "Canyoneering" },
+        { "activity_code": "BA316D0F-92AE-4E00-8C80-DBD605DC58C3", "activity_name": "Caving" },
+        { "activity_code": "B12FAAB9-713F-4B38-83E4-A273F5A43C77", "activity_name": "Climbing" },
+        { "activity_code": "C11D3746-5063-4BD0-B245-7178D1AD866C", "activity_name": "Compass and GPS" },
+        { "activity_code": "8C495067-8E94-4D78-BBD4-3379DACF6550", "activity_name": "Dog Sledding" },
+        { "activity_code": "AE42B46C-E4B7-4889-A122-08FE180371AE", "activity_name": "Fishing" },
+        { "activity_code": "D72206E4-6CD1-4441-A355-F8F1827466B1", "activity_name": "Flying" },
+        { "activity_code": "1DFACD97-1B9C-4F5A-80F2-05593604799E", "activity_name": "Food" },
+        { "activity_code": "3F3ABD16-2C52-4EAA-A1F6-4235DE5686F0", "activity_name": "Golfing" },
+        { "activity_code": "B33DC9B6-0B7D-4322-BAD7-A13A34C584A3", "activity_name": "Guactivity_codeed Tours" },
+        { "activity_code": "42FD78B9-2B90-4AA9-BC43-F10E9FEA8B5A", "activity_name": "Hands-On" },
+        { "activity_code": "BFF8C027-7C8F-480B-A5F8-CD8CE490BFBA", "activity_name": "Hiking" },
+        { "activity_code": "0307955A-B65C-4CE4-A780-EB36BAAADF0B", "activity_name": "Horse Trekking" },
+        { "activity_code": "8386EEAF-985F-4DE8-9037-CCF91975AC94", "activity_name": "Hunting and Gathering" },
+        { "activity_code": "5FF5B286-E9C3-430E-B612-3380D8138600", "activity_name": "Ice Skating" },
+        { "activity_code": "DF4A35E0-7983-4A3E-BC47-F37B872B0F25", "activity_name": "Junior Ranger Program" },
+        { "activity_code": "B204DE60-5A24-43DD-8902-C81625A09A74", "activity_name": "Living History" },
+        { "activity_code": "C8F98B28-3C10-41AE-AA99-092B3B398C43", "activity_name": "Museum Exhibits" },
+        { "activity_code": "4D224BCA-C127-408B-AC75-A51563C42411", "activity_name": "Paddling" },
+        { "activity_code": "0C0D142F-06B5-4BE1-8B44-491B90F93DEB", "activity_name": "Park Film" },
+        { "activity_code": "7779241F-A70B-49BC-86F0-829AE332C708", "activity_name": "Playground" },
+        { "activity_code": "42CF4021-8524-428E-866A-D33097A4A764", "activity_name": "SCUBA Diving" },
+        { "activity_code": "24380E3F-AD9D-4E38-BF13-C8EEB21893E7", "activity_name": "Shopping" },
+        { "activity_code": "F9B1D433-6B86-4804-AED7-B50A519A3B7C", "activity_name": "Skiing" },
+        { "activity_code": "3EBF7EAC-68FC-4754-B6A4-0C38A1583D45", "activity_name": "Snorkeling" },
+        { "activity_code": "C38B3C62-1BBF-4EA1-A1A2-35DE21B74C17", "activity_name": "Snow Play" },
+        { "activity_code": "7C912B83-1B1B-4807-9B66-97C12211E48E", "activity_name": "Snowmobiling" },
+        { "activity_code": "01D717BC-18BB-4FE4-95BA-6B13AD702038", "activity_name": "Snowshoeing" },
+        { "activity_code": "AE3C95F5-E05B-4A28-81DD-1C5FD4BE88E2", "activity_name": "Surfing" },
+        { "activity_code": "587BB2D3-EC35-41B2-B3F7-A39E2B088AEE", "activity_name": "Swimming" },
+        { "activity_code": "94369BFD-F186-477E-8713-AE2A745154DA", "activity_name": "Team Sports" },
+        { "activity_code": "4D06CEED-90C6-4B69-B264-32CC90B69BA6", "activity_name": "Tubing" },
+        { "activity_code": "8A1C7B17-C2C6-4F7C-9539-EA1E19971D80", "activity_name": "Water Skiing" },
+        { "activity_code": "0B685688-3405-4E2A-ABBA-E3069492EC50", "activity_name": "Wildlife Watching" }]
+
+        var activity = document.getElementById('selectedActivity');
+        for (var i = 0; i < activities.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            activity.innerHTML = activity.innerHTML +
+                '<option value="' + activities[i]['activity_code'] + '">' + activities[i]['activity_name'] + '</option>';
+        }
+    }
+
+    function showActivity(activity) {
+        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+        var activitySelected = document.getElementById('activitySelected');
+        activitySelected.innerHTML = 'Selected Activity: <br><b>' + activity.options[activity.selectedIndex].text;
+        console.log(activity.value)
+        activitySelectedCode=activity.value
+        console.log(activitySelectedCode);
+        localStorage.activitySelected=activity.value  
+    
+        }
+
+    // ***************************************************************************
+    // Parkblock
+
+    function populatePark() {
+        // THE JSON ARRAY.
+        var parks = [
+        { "park_name": "Abraham Lincoln Birthplace National Historical Park", "park_code": "abli" },
+        { "park_name": "Acadia National Park", "park_code": "acad" },
+        { "park_name": "Adams National Historical Park", "park_code": "adam" },
+        { "park_name": "African American Civil War Memorial ", "park_code": "afam" },
+        { "park_name": "African Burial Ground National Monument", "park_code": "afbg" },
+        { "park_name": "Agate Fossil Beds National Monument", "park_code": "agfo" },
+        { "park_name": "Ala Kahakai National Historic Trail", "park_code": "alka" },
+        { "park_name": "Alagnak Wild River", "park_code": "alag" },
+        { "park_name": "Alaska Public Lands ", "park_code": "anch" },
+        { "park_name": "Alcatraz Island ", "park_code": "alca" },
+        { "park_name": "Aleutian Islands World War II National Historic Area", "park_code": "aleu" },
+        { "park_name": "Alibates Flint Quarries National Monument", "park_code": "alfl" },
+        { "park_name": "Allegheny Portage Railroad National Historic Site", "park_code": "alpo" },
+        { "park_name": "American Memorial Park", "park_code": "amme" },
+        { "park_name": "Amistad National Recreation Area", "park_code": "amis" },
+        { "park_name": "Anacostia Park", "park_code": "anac" },
+        { "park_name": "Andersonville National Historic Site", "park_code": "ande" },
+        { "park_name": "Zion National Park", "park_code": "zion" }]
+
+        var park = document.getElementById('selectedPark');
+        for (var i = 0; i < parks.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            park.innerHTML = park.innerHTML +
+                '<option value="' + parks[i]['park_code'] + '">' + parks[i]['park_name'] + '</option>';
+            }
+        };
+
+        function showPark(park) {
+            // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+            var parkSelected = document.getElementById('parkSelected');
+            console.log(park, 'parkSelected');
+            parkSelected.innerHTML = 'Selected Park: <br><b>' + 
+                park.options[park.selectedIndex].text;
+        };
+
+    // ***************************************************************************
+    // filteredParkblock
+
+        var filteredParks="";
+
+        function populateFilteredParks() {
+        // THE JSON ARRAY.
+        $("#selectedFilteredPark").empty();
+        
+        filteredParks = JSON.parse(localStorage.filteredParks)
+
+        console.log('using park JSON: ' + filteredParks)
+        // filteredParks = [
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
+        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
+        // {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
+        // {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
+        // "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
+
+
+        // filteredParks = [{"states":"KY","fullName":"Abraham Lincoln Birthplace National Historical Park","url":"https://www.nps.gov/abli/index.htm","parkCode":"abli","designation":"National Historical Park","name":"Abraham Lincoln Birthplace"},
+        // {"states":"ME","fullName":"Acadia National Park","url":"https://www.nps.gov/acad/index.htm","parkCode":"acad","designation":"National Park","name":"Acadia"},
+        // {"states":"NE","fullName":"Agate Fossil Beds National Monument","url":"https://www.nps.gov/agfo/index.htm","parkCode":"agfo","designation":"National Monument","name":"Agate Fossil Beds"},
+        // {"states":"PA","fullName":"Allegheny Portage Railroad National Historic Site","url":"https://www.nps.gov/alpo/index.htm","parkCode":"alpo","designation":"National Historic Site","name":"Allegheny Portage Railroad"},
+        // {"states":"VA","fullName":"Appomattox Court House National Historical Park","url":"https://www.nps.gov/apco/index.htm","parkCode":"apco","designation":"National Historical Park","name":"Appomattox Court House"},
+        // {"states":"CT,GA,MA,MD,ME,NC,NH,NJ,NY,PA,TN,VA,VT,WV","fullName":"Appalachian National Scenic Trail","url":"https://www.nps.gov/appa/index.htm","parkCode":"appa","designation":"National Scenic Trail","name":"Appalachian"},
+        // {"states":"UT","fullName":"Arches National Park","url":"https://www.nps.gov/arch/index.htm","parkCode":"arch","designation":"National Park","name":"Arches"},
+        // {"states":"MD,VA","fullName":"Assateague Island National Seashore","url":"https://www.nps.gov/asis/index.htm","parkCode":"asis","designation":"National Seashore","name":"Assateague Island"},
+        // {"states":"SD","fullName":"Badlands National Park","url":"https://www.nps.gov/badl/index.htm","parkCode":"badl","designation":"National Park","name":"Badlands"},
+        // {"states":"NM","fullName":"Bandelier National Monument","url":"https://www.nps.gov/band/index.htm","parkCode":"band","designation":"National Monument","name":"Bandelier"},
+        // {"states":"TX","fullName":"Big Bend National Park","url":"https://www.nps.gov/bibe/index.htm","parkCode":"bibe","designation":"National Park","name":"Big Bend"},
+        // {"states":"MT,WY","fullName":"Bighorn Canyon National Recreation Area","url":"https://www.nps.gov/bica/index.htm","parkCode":"bica","designation":"National Recreation Area","name":"Bighorn Canyon"},
+        // {"states":"FL","fullName":"Big Cypress National Preserve","url":"https://www.nps.gov/bicy/index.htm","parkCode":"bicy","designation":"National Preserve","name":"Big Cypress"},
+        // {"states":"KY,TN","fullName":"Big South Fork National River & Recreation Area","url":"https://www.nps.gov/biso/index.htm","parkCode":"biso","designation":"National River & Recreation Area","name":"Big South Fork"},
+        // {"states":"NC","fullName":"Blue Ridge National Heritage Area","url":"https://www.nps.gov/blrn/index.htm","parkCode":"blrn","designation":"National Heritage Area","name":"Blue Ridge"},
+        // {"states":"UT","fullName":"Bryce Canyon National Park","url":"https://www.nps.gov/brca/index.htm","parkCode":"brca","designation":"National Park","name":"Bryce Canyon"},
+        // {"states":"NC","fullName":"Cape Hatteras National Seashore","url":"https://www.nps.gov/caha/index.htm","parkCode":"caha","designation":"National Seashore","name":"Cape Hatteras"},
+        // {"states":"UT","fullName":"Canyonlands National Park","url":"https://www.nps.gov/cany/index.htm","parkCode":"cany","designation":"National Park","name":"Canyonlands"},
+        // {"states":"UT","fullName":"Capitol Reef National Park","url":"https://www.nps.gov/care/index.htm","parkCode":"care","designation":"National Park","name":"Capitol Reef"},
+        // {"states":"NM","fullName":"Carlsbad Caverns National Park","url":"https://www.nps.gov/cave/index.htm","parkCode":"cave","designation":"National Park","name":"Carlsbad Caverns"},
+        // {"states":"NM","fullName":"Capulin Volcano National Monument","url":"https://www.nps.gov/cavo/index.htm","parkCode":"cavo","designation":"National Monument","name":"Capulin Volcano"},
+        // ]
+        // "[
+        // {"states":"UT","fullName":"Arches National Park","url":"https://www.nps.gov/arch/index.htm","parkCode":"arch","designation":"National Park","name":"Arches"},
+        // {"states":"UT","fullName":"Capitol Reef National Park","url":"https://www.nps.gov/care/index.htm","parkCode":"care","designation":"National Park","name":"Capitol Reef"},
+        // {"states":"CA,NV","fullName":"Death Valley National Park","url":"https://www.nps.gov/deva/index.htm","parkCode":"deva","designation":"National Park","name":"Death Valley"},
+        // {"states":"AK","fullName":"Wrangell - St Elias National Park & Preserve","url":"https://www.nps.gov/wrst/index.htm","parkCode":"wrst","designation":"National Park & Preserve","name":"Wrangell - St Elias"},
+        // {"states":"UT","fullName":"Zion National Park","url":"https://www.nps.gov/zion/index.htm","parkCode":"zion","designation":"National Park","name":"Zion"}]"
+
+
+
+
+
+        
+        let filteredPark = document.getElementById('selectedFilteredPark');
+        for (var i = 0; i < filteredParks.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            filteredPark.innerHTML = filteredPark.innerHTML +
+                '<option value="' + filteredParks[i]['parkCode'] + '">' + filteredParks[i]['fullName'] + '</option>';
+            }
+        };
+
+        var chosenParkCode 
+
+        function saveParkCode(parkCode){
+        localStorage.chosenParkCode =  parkCode;
+        }
+
+        function showFilteredPark(filteredPark) {
+            $("#finalParkSelection").empty();
+            // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+            var filteredParkSelected = document.getElementById('selectedFilteredPark');
+            let parkChoice = filteredPark.options[filteredPark.selectedIndex].text 
+
+            // selectedFilteredPark.innerHTML = 'Selected Filtered Park: <b>' + 
+            //     parkChoice + '</b> </br>' +
+            //     'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
+            selectedFilteredPark.innerHTML = 'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
+                console.log(selectedFilteredPark.innerHTML);
+            let chosenParkCode = selectedFilteredPark.innerHTML.slice(8);
+            let displayPark = 'Park Chosen: ' +  '</b> </br>' + parkChoice;
+
+            $('#finalParkSelection').append(displayPark);
+
+            console.log('Park Choice Code: ' + chosenParkCode)
+            console.log('Park Choice Name: ' + parkChoice)
+            saveParkCode(chosenParkCode);
+
+            //    event.preventDefault();
+        };
+
+
+    // ***************************************************************************
+    // list population and listeners
+
+
+
+    populatePark()
+    populateTopic()
+    populateActivity()
+
+$(".list-group-item").on("click", function(){
+let code = $(this).find(".codes").text();
+console.log(code);
+});
+
+$("#activitySelected").on("click", function(){
+let code = $(this).find(".codes").text();
+// console.log("Activity = " + code);
+getParksFromActivities()
+// populateFilteredParks()
+});
+
+$("#topicSelected").on("click", function(){
+let code = $(this).find(".codes").text();
+console.log("Topic = " + code);
+populateFilteredParks()
+});
+
+$("#parkSelected").on("click", function(){
+let code = $(this).find(".codes").text();
+console.log("Park = " + code);
+populateFilteredParks()
+});
+
+$("#focus-on-park").on("click", function(){
+// let code = $(this).find(".codes").text();
+// console.log("Park Chosen  = " + chosenParkCode);
+// populateFilteredParks()
+getParkInfo()
+});
+
+$("#clear-search").on("click", function(){
+
+    $("#finalParkSelection").empty();
+});
+
+// $('#focus-on-park').on("click", function(){
+
+// getSelectedParkInfo()
+
+// });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src= "./apiCalls.js"></script>
+<script src= "./apiCalls.js"></script>
+
+</html>

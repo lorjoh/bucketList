@@ -1,3 +1,40 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 316d281040f4bb7dcb391f2dd7f61b46fbdbdc26
+
+*{
+    box-sizing: border-box;
+    
+}
+
+body {
+    
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+h1{
+    font-size:1.5rem; 
+    font-weight:lighter
+}
+h3{
+    font-weight: lighter;
+}
+.forecast{
+    
+    font-size: 0.9em;
+}
+span{
+    font-size: 1em;
+}
+li:hover{
+    background-color: lightslategray;
+    text-decoration: underline;
+}
+=======
 
 *{
     box-sizing: border-box;
@@ -24,3 +61,7 @@ li:hover{
     background-color: lightslategray;
     text-decoration: underline;
 }
+<<<<<<< HEAD
+>>>>>>> main
+=======
+>>>>>>> 316d281040f4bb7dcb391f2dd7f61b46fbdbdc26
