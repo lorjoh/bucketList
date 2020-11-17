@@ -114,7 +114,7 @@
                     <div class="form-group row">
                       <label for="inputActivities" class="col-sm-2 col-form-label">Activities and topics you'd like to explore at this park.</label>
                       <div class="col-sm-10">
-                        <input class="form-control" id="inputActivities" placeholder="At this park, we'd enjoy doing ...">
+                        <input class="form-control"  id="inputActivities" placeholder="At this park, we'd enjoy doing ...">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -148,21 +148,14 @@
     <script src="script.js"></script>
 
 <script>
-{{!-- topicsFound = {topics: [
-{"id":"7F81A0CB-B91F-4896-B9A5-41BE9A54A27B","name":"Archeology"},
-{"id":"7F12224B-217A-4B07-A4A2-636B1CE7F221","name":"Colonization and Settlement"},
-{"id":"DAAD7F5E-9112-45F2-9A27-DA51B639F27E","name":"Dams"},
-{"id":"12EA2B56-17EC-410A-A10D-BFBA87A0669B","name":"Explorers and Expeditions"},
-{"id":"4C9D4777-A9DA-47D1-A0B9-F4A3C98BC1B3","name":"Maritime"},
-{"id":"123CE28E-0EFA-4330-8E6E-EEFF3D7BF772","name":"Coastal Defenses"},
-{"id":"263BAC6E-4DEC-47E4-909D-DA8AD351E06E","name":"Lighthouses"},
-]} --}}
 
 let acadia = JSON.parse(localStorage.parkResponse);
 
 let activitiesFound =acadia.data[0].activities;
 let topicsFound = acadia.data[0].topics;
 let parkName = acadia.data[0].fullName;
+
+let activityTopics ="";
 
 activitiesFound.forEach(element => {
       let activityName = element.name;
@@ -182,23 +175,20 @@ topicsFound.forEach(element => {
 $(".activity").on("click", function(){
     let activityAdd = $(this).attr('dataActivity');
     console.log(activityAdd);
+    activityTopics = activityAdd  + ', ' + activityTopics;
+    $('#inputActivities').attr("placeholder", activityTopics)
 });
 
 $(".topic").on("click", function(){
     let topicAdd = $(this).attr('dataTopic');
     console.log(topicAdd);
+    activityTopics = topicAdd  + ', ' + activityTopics;
+    $('#inputActivities').attr("placeholder", activityTopics)
 });
 
 $("#add-to-bucket").on("click", function(){
   console.log('this button will save to bucket list in the future');
 });
-
-{{!-- $("#topicSelected").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log("Topic listener fired");
-getParksFromTopics()
-// populateFilteredParks()
-}); --}}
 
 
 $('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
