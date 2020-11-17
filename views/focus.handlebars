@@ -77,36 +77,44 @@
                         <div class="row">
                           <legend class="col-form-label col-sm-2 pt-0" id="rateThisPark"></legend>
                           <div class="col-sm-10">
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
-                              <label class="form-check-label" for="gridRadios1">
-                                1. Forget about it.
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                              <label class="form-check-label" for="gridRadios2">
-                                2. Worth a second look.
-                              </label>
-                            </div>
-                            <div class="form-check">
+                            <div class="parkRating">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                                <label class="form-check-label" for="gridRadios1">
+                                  1. Forget about it.
+                                </label> 
+                              <br>
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                  2. Worth a second look.
+                                </label>
+                              <br>
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
                                 <label class="form-check-label" for="gridRadios3">
-                                  3. Interesting.
+                                    3. Interesting.
                                 </label>
-                            </div>
-                            <div class="form-check">
+                              <br>
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" checked>
                                 <label class="form-check-label" for="gridRadios4">
-                                  4. Let's visit if we're in the area.
+                                    4. Let's visit if we're in the area.
                                 </label>
-                              </div>
-                              <div class="form-check">
+                              <br>
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
                                 <label class="form-check-label" for="gridRadios5">
-                                  5. This park is worth a special trip just to visit it.
+                                    5. This park is worth a special trip just to visit it.
                                 </label>
                               </div>
+                            {{!-- <div class="form-check">
+
+                            </div>
+                            <div class="form-check">
+
+                            </div>
+                            <div class="form-check">
+
+                              </div>
+                              <div class="form-check">
+
+                              </div> --}}
                           </div>
                         </div>
                       </fieldset>
@@ -182,7 +190,7 @@ $(".activity").on("click", function(){
 $(".topic").on("click", function(){
     let topicAdd = $(this).attr('dataTopic');
     console.log(topicAdd);
-    activityTopics = topicAdd  + ', ' + activityTopics;
+        activityTopics = topicAdd  + ', ' + activityTopics;
     $('#inputActivities').attr("placeholder", activityTopics)
 });
 
