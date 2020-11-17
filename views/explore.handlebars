@@ -62,9 +62,9 @@
 
             </div>
 
-            <div class="col-sm-4" align='center'>
+            <div class="col-sm-4">
 
-            <h5 style='padding-left: 20px';>Generate matching list of Parks</h5>
+            <h5 style='padding-left: 20px'>Generate matching list of Parks</h5>
                 <div class="col-sm-12" id="Park-info">
                     <ul class="list-group">
                         <li class="list-group-item" id="activitySelected">
@@ -782,6 +782,7 @@
                 park.options[park.selectedIndex].text;
             localStorage.parkSelected=park.value
             localStorage.parkSelectedName=park.options[park.selectedIndex].text 
+            localStorage.chosenParkCode=park.value
         };
 
     // ***************************************************************************
@@ -794,17 +795,6 @@
         $("#selectedFilteredPark").empty();
         
         filteredParks = JSON.parse(localStorage.filteredParks)
-
-        // console.log('using park JSON: ' + filteredParks)
-        // filteredParks = [
-        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        // {"designation":"","fullName":"Alcatraz Island","name":"Alcatraz Island","parkCode":"alca",
-        // "states":"CA","url":"https://www.nps.gov/alca/index.htm"},
-        // {"designation":"National Historic Area","fullName":"Aleutian Islands World War II National Historic Area","name":"Aleutian Islands World War II","parkCode":"aleu","states":"AK","url":"https://www.nps.gov/aleu/index.htm"},
-        // {"designation":"National Historic Site","fullName":"Bent's Old Fort National Historic Site","name":"Bent's Old Fort",
-        // "parkCode":"beol","states":"CO","url":"https://www.nps.gov/beol/index.htm"}]
-
         
         let filteredPark = document.getElementById('selectedFilteredPark');
         for (var i = 0; i < filteredParks.length; i++) {
@@ -889,11 +879,7 @@ $("#parkSelected").on("click", function(){
 });
 
 $("#focus-on-park").on("click", function(){
-    $(location).attr('href','/focus')
-// let code = $(this).find(".codes").text();
-// console.log("Park Chosen  = " + chosenParkCode);
-// populateFilteredParks()
-{{!-- getParkInfo() --}}
+  getParkFocusInfo()  
 });
 
 $("#clear-search").on("click", function(){
