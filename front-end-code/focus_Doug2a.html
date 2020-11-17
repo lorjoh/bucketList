@@ -6,18 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <title>BucketList Focus</title>
+    <title>National Park Focus</title>
     <!--Bootstrap CSS CDN-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <!-- Font Awesome CSS Icons (For cool glyphicons) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> --}}
 </head>
 <body>
     <!--Jumbotron Page Title-->
-    <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;" id = "header">
+    <div class="jumbotron container-fluid mt-2 text-center p-2 font-size:1.8rem; font-weight:lighter" style="background-color:#404040 ;color: white; 
+    font-size:1.8rem; font-weight:lighter" id = "header">
+
+<script>
 
 
+</script>
     </div>
     <div class="container">
         <!--Row for searching a park-->
@@ -25,17 +29,23 @@
 
 
             <div class="col-sm-3 bg-light">
-                <h4 class="pt-1" id = activitiesHed></h4>
+                <h5 class="pt-1" id = activitiesHed></h5>
                 <!--Here we create the list of activities at the park-->
                 <p id = activitiesList></p>
+                <ul>
+                {{#each activities}}
+                    <li>{{this.name}}</li>
+                {{/each}}
+                </ul>
 
-                <h4 class="pt-1" id = topicsHed></h4>
+                <h5 class="pt-1" id = topicsHed></h5>
                 <!--Here we create the list of topics at the park-->
-                <p id = topicsList></p>
-
-
-
-
+                {{topicSection}}
+                <ul>
+                {{#each topics}}
+                    <li>{{this.name}}</li>
+                {{/each}}
+                </ul>
                 <!--section for search park list-->
                 <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button>
             </div>   
@@ -50,13 +60,16 @@
                     <p id = photoCredit1></p>
                     <h4 id = photoTitle1></h4>
                     <p id = caption1></p>
-                    <br>
-                    <br>                
                 </div>
                 
+                <button type="button" class="btn btn-primary" id="moreParkPhotos"></button>
+                <br>
+                <br>
+                <br>
+
                 <div class="row ml-12 border border-dark rounded">
                     <div class="col-sm-12" id="current-park">
-                        <h3 class="mb-1 mt-2 bolder" id="park-data"></h3>
+                        <h4 class="mb-1 mt-2 bolder" id="park-data"></h4>
                         <p id = parkName></p>
                         <p id = location></p>
                         <p id = description></p> 
@@ -68,36 +81,75 @@
                 
                 <br>                
                 <br>
-                <h4>More Park Information:</h4>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Click to Rate This Park:</p>
-                        <p>1 Lo, 5 Hi:</p>
+                <h4 id = userNotes></h4>
+                <hr>
+                <form>
+                    <fieldset class="form-group">
+                        <div class="row">
+                          <legend class="col-form-label col-sm-2 pt-0" id="rateThisPark"></legend>
+                          <div class="col-sm-10">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                              <label class="form-check-label" for="gridRadios1">
+                                1. Forget about it.
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <label class="form-check-label" for="gridRadios2">
+                                2. Worth a second look.
+                              </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                  3. Interesting.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" checked>
+                                <label class="form-check-label" for="gridRadios4">
+                                  4. Let's visit if we're in the area.
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+                                <label class="form-check-label" for="gridRadios5">
+                                  5. This park is worth a special trip just to visit it.
+                                </label>
+                              </div>
+                          </div>
+                        </div>
+                      </fieldset>
+  
+                    <div class="form-group row">
+                      <label for="inputActivities" class="col-sm-2 col-form-label">Things youd'd like to do at this park.</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" id="inputActivities" placeholder="At this park, we'd enjoy doing ...">
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Click to Make Notes About This Park</p>
+                    <div class="form-group row">
+                        <label for="inputNotes" class="col-sm-2 col-form-label">Travel plans.</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="inputNotes" placeholder="When and how to travel to this park ...">
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                      <label for="inputNotes" class="col-sm-2 col-form-label">Other notes about this park.</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" id="inputNotes" placeholder="More notes to plan your stay ...">
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
-                        <p>Click to View More Photos of This Park</p>
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Save this park to your bucket list.</button>
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
-                        <p>Things You'd Like to Do</p>
-                    </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Plan Your Travel</p>
-                    </div>
-                </div>   
+                  </form>
+                  <hr>
             </div>
         </div>
-    </div>
+    </di
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -105,6 +157,16 @@
     <script src="script.js"></script>
 
 <script>
+topicsFound = {topics: [
+{"id":"7F81A0CB-B91F-4896-B9A5-41BE9A54A27B","name":"Archeology"},
+{"id":"7F12224B-217A-4B07-A4A2-636B1CE7F221","name":"Colonization and Settlement"},
+{"id":"DAAD7F5E-9112-45F2-9A27-DA51B639F27E","name":"Dams"},
+{"id":"12EA2B56-17EC-410A-A10D-BFBA87A0669B","name":"Explorers and Expeditions"},
+{"id":"4C9D4777-A9DA-47D1-A0B9-F4A3C98BC1B3","name":"Maritime"},
+{"id":"123CE28E-0EFA-4330-8E6E-EEFF3D7BF772","name":"Coastal Defenses"},
+{"id":"263BAC6E-4DEC-47E4-909D-DA8AD351E06E","name":"Lighthouses"},
+]}
+
 
 let acadia = {
 "total": "1",
@@ -569,6 +631,8 @@ let acadia = {
 }
 
 let parkName = acadia.data[0].fullName;
+let shortName = acadia.data[0].name;
+
 $('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
 $('#parkName').append("Park Name: " + parkName);
 $('#location').append("Location: " + acadia.data[0].addresses[0].city +", " + acadia.data[0].addresses[0].stateCode);
@@ -576,7 +640,6 @@ $('#description').append("Description: " + acadia.data[0].description);
 $('#website').append("Website: <a href>" + acadia.data[0].url + "</a>");
 $('#phoneNumber').append("Telephone " + acadia.data[0].contacts.phoneNumbers[0].phoneNumber);
 $('#parkEmail').append("Park Email: " + acadia.data[0].contacts.emailAddresses[0].emailAddress);
-let shortName = acadia.data[0].name;
 $('#photoHed').append("Photo From " + shortName);
 $('#caption1').append(acadia.data[0].images[0].caption);
 $('#photo1').append("<img src='" + acadia.data[0].images[0].url + "' width='100%'>");
@@ -584,29 +647,11 @@ $('#photoCredit1').append(acadia.data[0].images[0].credit);
 $('#photoTitle1').append(acadia.data[0].images[0].title);
 $('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
 $('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
-
-var parkActivitiesList = [acadia.data[0].activities];
-parkActivitiesList.forEach(myFunction);
-
-function myFunction(name, index) {
-    document.getElementById("activitiesList").innerHTML += index + ":" + name + "<br>";
-}
-
-// var parkTopicsList = [acadia.data[0].topics];
-// parkTopicsList.forEach(myFunction);
-
-// function myFunction(item, index) {
-//     document.getElementById("topicsList").innerHTML += index + ":" + item + "<br>";
-// }
-
+$('#userNotes').append("<strong>Record Your Notes About " + shortName + "</strong>");
+$('#moreParkPhotos').append("More photos of " + shortName);
+$('#rateThisPark').append("Rate " + shortName);
 
 </script>
-
-
-
-
-
-
 
 
 </body>

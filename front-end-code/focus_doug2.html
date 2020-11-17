@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <title>BucketList Focus</title>
+    <!--Bootstrap CSS CDN-->
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css"> --}}
+</head>
+<body>
+    <!--Jumbotron Page Title-->
+    <div class="jumbotron container-fluid mt-2 text-center p-2 font-size:1.8rem; font-weight:lighter" style="background-color:#404040 ;color: white; 
+    font-size:1.8rem; font-weight:lighter" id = "header">
+
+<script>
+
+
+</script>
+    </div>
+    <div class="container">
+        <!--Row for searching a park-->
+        <div class="row">
+
+
+            <div class="col-sm-3 bg-light">
+                <h5 class="pt-1" id = activitiesHed></h5>
+                <!--Here we create the list of activities at the park-->
+                <p id = activitiesList></p>
+                <ul>
+                {{#each activities}}
+                    <li>{{this.name}}</li>
+                {{/each}}
+                </ul>
+
+                <h5 class="pt-1" id = topicsHed></h5>
+                <!--Here we create the list of topics at the park-->
+                {{topicSection}}
+                <ul>
+                {{#each topics}}
+                    <li>{{this.name}}</li>
+                {{/each}}
+                </ul>
+                <!--section for search park list-->
+                <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button>
+            </div>   
+
+
+
+            <div class="col-sm-9">
+               
+                <div>
+                    <h3 id = photoHed></h3>
+                    <div id=photo1></div>
+                    <p id = photoCredit1></p>
+                    <h4 id = photoTitle1></h4>
+                    <p id = caption1></p>
+                    <br>
+                    <br>                
+                </div>
+                
+                <div class="row ml-12 border border-dark rounded">
+                    <div class="col-sm-12" id="current-park">
+                        <h4 class="mb-1 mt-2 bolder" id="park-data"></h4>
+                        <p id = parkName></p>
+                        <p id = location></p>
+                        <p id = description></p> 
+                        <p id = website></p>
+                        <p id = phoneNumber></p>
+                        <p id = parkEmail></p>
+                    </div>
+                </div>
+                
+                <br>                
+                <br>
+                <h4>More Park Information:</h4>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Click to Rate This Park:</p>
+                        <p>1 Lo, 5 Hi:</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Click to Make Notes About This Park</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p>Click to View More Photos of This Park</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p>Things You'd Like to Do</p>
+                    </div>
+                </div>
+                <div class="row text-light">
+                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p>Plan Your Travel</p>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <!--jQuery JS-->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!--Code to Jvascript File-->
+    <script src="script.js"></script>
+
+<script>
+topicsFound = {topics: [
+{"id":"7F81A0CB-B91F-4896-B9A5-41BE9A54A27B","name":"Archeology"},
+{"id":"7F12224B-217A-4B07-A4A2-636B1CE7F221","name":"Colonization and Settlement"},
+{"id":"DAAD7F5E-9112-45F2-9A27-DA51B639F27E","name":"Dams"},
+{"id":"12EA2B56-17EC-410A-A10D-BFBA87A0669B","name":"Explorers and Expeditions"},
+{"id":"4C9D4777-A9DA-47D1-A0B9-F4A3C98BC1B3","name":"Maritime"},
+{"id":"123CE28E-0EFA-4330-8E6E-EEFF3D7BF772","name":"Coastal Defenses"},
+{"id":"263BAC6E-4DEC-47E4-909D-DA8AD351E06E","name":"Lighthouses"},
+]}
+
+
+let acadia = JSON.parse(localStorage.parkResponse);
+
+let parkName = acadia.data[0].fullName;
+$('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
+$('#parkName').append("Park Name: " + parkName);
+$('#location').append("Location: " + acadia.data[0].addresses[0].city +", " + acadia.data[0].addresses[0].stateCode);
+$('#description').append("Description: " + acadia.data[0].description);
+$('#website').append("Website: <a href>" + acadia.data[0].url + "</a>");
+$('#phoneNumber').append("Telephone " + acadia.data[0].contacts.phoneNumbers[0].phoneNumber);
+$('#parkEmail').append("Park Email: " + acadia.data[0].contacts.emailAddresses[0].emailAddress);
+let shortName = acadia.data[0].name;
+$('#photoHed').append("Photo From " + shortName);
+$('#caption1').append(acadia.data[0].images[0].caption);
+$('#photo1').append("<img src='" + acadia.data[0].images[0].url + "' width='100%'>");
+$('#photoCredit1').append(acadia.data[0].images[0].credit);
+$('#photoTitle1').append(acadia.data[0].images[0].title);
+$('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
+$('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
+
+</script>
+
+
+</body>
+</html>
