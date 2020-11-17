@@ -25,8 +25,8 @@ CREATE TABLE trips (
 	id int NOT NULL AUTO_INCREMENT,
 	park_name varchar(255) NOT NULL,
 	park_code varchar(4) NOT NULL,
-	selectedActivity varchar(255),
-	selectedTopic varchar(255),
+	rating varchar(2),
+	activities varchar(255),
 	to_dos varchar(255),
 	notes varchar(255),
 	PRIMARY KEY (id)

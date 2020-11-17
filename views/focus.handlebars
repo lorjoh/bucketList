@@ -39,7 +39,7 @@
                 <ul id='topicID' style='padding-left: 20px'></ul>
 
                 <!--section for search park list-->
-                <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button>
+                {{!-- <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button> --}}
             </div>   
 
 
@@ -70,36 +70,77 @@
                 
                 <br>                
                 <br>
-                <h4>More Park Information:</h4>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Click to Rate This Park:</p>
-                        <p>1 Lo, 5 Hi:</p>
+               <h4 id = userNotes></h4>
+                <hr>
+                <form>
+                    <fieldset class="form-group">
+                        <div class="row">
+                          <legend class="col-form-label col-sm-2 pt-0" id="rateThisPark"></legend>
+                          <div class="col-sm-10">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                              <label class="form-check-label" for="gridRadios1">
+                                1. Forget about it.
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <label class="form-check-label" for="gridRadios2">
+                                2. Worth a second look.
+                              </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                  3. Interesting.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" checked>
+                                <label class="form-check-label" for="gridRadios4">
+                                  4. Let's visit if we're in the area.
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+                                <label class="form-check-label" for="gridRadios5">
+                                  5. This park is worth a special trip just to visit it.
+                                </label>
+                              </div>
+                          </div>
+                        </div>
+                      </fieldset>
+  
+                    <div class="form-group row">
+                      <label for="inputActivities" class="col-sm-2 col-form-label">Activities and topics you'd like to explore at this park.</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" id="inputActivities" placeholder="At this park, we'd enjoy doing ...">
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Click to Make Notes About This Park</p>
+                    <div class="form-group row">
+                        <label for="inputNotes" class="col-sm-2 col-form-label">Travel plans.</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="inputTravel" placeholder="When and how to travel to this park ...">
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                      <label for="inputNotes" class="col-sm-2 col-form-label">Other notes about this park.</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" id="inputNotes" placeholder="More notes to plan your stay ...">
+                      {{ park_Info.notes}}
+                      
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
-                        <p>Click to View More Photos of This Park</p>
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="button" id="add-to-bucket" class="btn btn-primary">Save this park to your bucket list</button>
+                      </div>
                     </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded">
-                        <p>Things You'd Like to Do</p>
-                    </div>
-                </div>
-                <div class="row text-light">
-                    <div class="col-sm-12 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                        <p>Plan Your Travel</p>
-                    </div>
-                </div>   
+                  </form>
+                  <hr>
             </div>
         </div>
-    </div>
+      </div>
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -117,7 +158,6 @@
 {"id":"263BAC6E-4DEC-47E4-909D-DA8AD351E06E","name":"Lighthouses"},
 ]} --}}
 
-
 let acadia = JSON.parse(localStorage.parkResponse);
 
 let activitiesFound =acadia.data[0].activities;
@@ -126,15 +166,40 @@ let parkName = acadia.data[0].fullName;
 
 activitiesFound.forEach(element => {
       let activityName = element.name;
-      let newListElement = $('<li>').text(activityName);
+      let newListElement = $('<li class="activity">').text(activityName);
+      newListElement.attr('dataActivity', activityName )
       $('#activityID').append(newListElement);
 })
 
 topicsFound.forEach(element => {
       let topicName = element.name;
-      let newListElement = $('<li>').text(topicName);
+      let newListElement = $('<li class="topic">').text(topicName);
+      newListElement.attr('dataTopic', topicName )
       $('#topicID').append(newListElement);
+
 })
+
+$(".activity").on("click", function(){
+    let activityAdd = $(this).attr('dataActivity');
+    console.log(activityAdd);
+});
+
+$(".topic").on("click", function(){
+    let topicAdd = $(this).attr('dataTopic');
+    console.log(topicAdd);
+});
+
+$("#add-to-bucket").on("click", function(){
+  console.log('this button will save to bucket list in the future');
+});
+
+{{!-- $("#topicSelected").on("click", function(){
+let code = $(this).find(".codes").text();
+console.log("Topic listener fired");
+getParksFromTopics()
+// populateFilteredParks()
+}); --}}
+
 
 $('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
 $('#parkName').append("Park Name: " + parkName);
@@ -151,6 +216,9 @@ $('#photoCredit1').append(acadia.data[0].images[0].credit);
 $('#photoTitle1').append(acadia.data[0].images[0].title);
 $('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
 $('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
+$('#userNotes').append("<strong>Record Your Notes About " + shortName + "</strong>");
+$('#moreParkPhotos').append("More photos of " + shortName);
+$('#rateThisPark').append("Rate " + shortName);
 
 </script>
 
