@@ -9,7 +9,7 @@ var connection;
 //     host: "localhost",
 //     user: "root",
 //     password: "password",
-//     database: "parks_db"
+//     database: "nationalparks_db"
 //   });
 // }
 
@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: "password",
-  ddatabase: "parks_db"
+  database: "nationalparks"
 });
 
 // Make connection.
