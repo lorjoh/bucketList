@@ -152,6 +152,28 @@
 
 <script>
 
+let focusResults = [
+        { parkName: "Grand Canyon National Park",
+
+        parkCode: "grca",
+
+        parkRating: "5",
+
+        activities: "hiking, climbing",
+
+        topics: "Native American History",
+
+        travel: "visit the Havasupi reservation",
+
+        notes: "check flight options "
+         }]
+
+
+{{!-- focusResults.parkName, focusResults.parkCode, focusResults.parkRating, focusResults.activities, focusResults.topics,
+    focusResults.travel, focusResults.notes --}}
+
+
+
 let acadia = JSON.parse(localStorage.parkResponse);
 
 let activitiesFound =acadia.data[0].activities;
