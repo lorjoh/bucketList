@@ -1,3 +1,4 @@
-node_modules/
+# ignore node_modules folder
+node_modules
+# ignore api keys
 .env
-.DS_Store

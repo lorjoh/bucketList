@@ -1,16 +1,12 @@
 var express = require("express");
 var trips = require("../models/bucketListModel.js");
 var router = express.Router();
+const axios = require('axios');
 
-// router.get("/", function(req, res) {
-//   trip.all(function(data) {
-//     var tripData = {
-//       trips: data
-//     };
-//     console.log(tripData);
-//     res.render("index", tripData);
-//   });
-// });
+const dotenv = require('dotenv').config();
+
+const apiKey = process.env.API_KEY
+console.log(apiKey)
 
 router.get('/', function(req, res){
   res.render('explore',{
@@ -21,6 +17,95 @@ router.get('/focus', function(req, res){
   res.render('focus',{
   });
 });
+
+// All park data route from API call from Explore page to invoke API call from National Parks - response to Explore API call with filteredParks object
+
+router.get('/parkFocusInfo/:parkCode', function(req, res){
+
+  let sentParkCode = req.params.parkCode; 
+
+    console.log('calling park info api')
+    console.log('using park code: ' + sentParkCode)
+    
+    // let parkAPIKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+    
+    let parkURL ="https://developer.nps.gov/api/v1/parks?parkCode=" + sentParkCode+ "&api_key=" + apiKey 
+    
+    console.log(parkURL);
+    
+        axios.get(parkURL)      
+
+          // We store all of the retrieved data inside of an object called "response"
+          .then(function(response) {
+            // Log the queryURL
+            console.log(response.data);
+
+           res.json(response.data);
+          });
+      }
+  );
+
+// Activities route from API call from Explore page to invoke API call from National Parks - response to Explore API call with filteredParks object
+
+router.get('/focusActivities/:activityCode', function(req, res){
+
+  let sentActivityCode = req.params.activityCode; 
+
+  // function getParksFromActivities() {
+
+    // let activitySelected = localStorage.activitySelected;
+    console.log('calling park activity api')
+    console.log('using activity code: ' + sentActivityCode)
+    
+    // let parkAPIKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+    
+    let parkURL ="https://developer.nps.gov/api/v1/activities/parks?id=" + sentActivityCode+ "&api_key=" + apiKey 
+    
+    console.log(parkURL);
+    
+        axios.get(parkURL)      
+
+          // We store all of the retrieved data inside of an object called "response"
+          .then(function(response) {
+            // Log the queryURL
+            console.log(response.data);
+
+           res.json(response.data.data[0].parks);
+          });
+      }
+  );
+
+// Topics route from API call from Explore page to invoke API call from National Parks - response to Explore API call with filteredParks object
+ 
+router.get('/focusTopics/:topicCode', function(req, res){
+
+  let sentTopicCode = req.params.topicCode; 
+
+  // function getParksFromActivities() {
+
+    // let activitySelected = localStorage.activitySelected;
+    console.log('calling park activity api')
+    console.log('using activity code: ' + sentTopicCode)
+    
+    // let parkAPIKey = "wOcYQh1jt3j2jym6kbnOKsReaO1JEYLb9g1KIvs5";
+    
+    let parkURL ="https://developer.nps.gov/api/v1/topics/parks?id=" + sentTopicCode+ "&api_key=" + apiKey 
+    
+    console.log(parkURL);
+    
+        axios.get(parkURL)      
+
+          // We store all of the retrieved data inside of an object called "response"
+          .then(function(response) {
+            // Log the queryURL
+            console.log(response.data);
+
+           res.json(response.data.data[0].parks);
+          });
+      }
+  // res.render('focus',{
+  );
+
 
 router.get('/review', function(req, res){
   res.render('review',{
@@ -42,34 +127,5 @@ router.post("/api/trips", function(req, res) {
   });
 });
 
-// router.put("/api/trips", function(req, res) {
-  // var condition = "id = " + req.params.id;
-
-  // console.log("condition", condition);
-
-//   trip.update({
-    
-//   }, condition, function(result) {
-//     if (result.changedRows == 0) {
-//       // If no rows were changed, then the ID must not exist, so 404
-//       return res.status(404).end();
-//     } else {
-//       res.status(200).end();
-//     }
-//   });
-// });
-
-// router.delete("/api/trips", function(req, res) {
-
-
-//   trip.delete(condition, function(result) {
-//     if (result.affectedRows == 0) {
-//       // If no rows were changed, then the ID must not exist, so 404
-//       return res.status(404).end();
-//     } else {
-//       res.status(200).end();
-//     }
-//   });
-// });
 
 module.exports = router;
