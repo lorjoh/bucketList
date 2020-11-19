@@ -795,6 +795,15 @@
         $("#selectedFilteredPark").empty();
         
         filteredParks = JSON.parse(localStorage.filteredParks)
+
+        console.log(filteredParks)
+
+        let z = filteredParks[0];
+
+        filteredParks.unshift(z)
+
+        console.log('Updated parks: ' + filteredParks)
+
         
         let filteredPark = document.getElementById('selectedFilteredPark');
         for (var i = 0; i < filteredParks.length; i++) {
