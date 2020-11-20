@@ -2,8 +2,9 @@ var express = require("express");
 var trips = require("../models/bucketListModel.js");
 var router = express.Router();
 const axios = require('axios');
-
+var connection = require("../config/connection.js");
 const dotenv = require('dotenv').config();
+var trip = require("../models/bucketListModel.js");
 
 const apiKey = process.env.API_KEY
 console.log(apiKey)
@@ -17,6 +18,19 @@ router.get('/focus', function(req, res){
   res.render('focus',{
   });
 });
+
+router.get("/allTrips", function(req, res) {
+  trip.all(function(data) {
+    var tripObject = {
+      trips: data
+    };
+    console.log(tripObject);
+  });
+});
+
+router.get('/review', function(req, res){
+  res.render('review')
+  });
 
 // All park data route from API call from Explore page to invoke API call from National Parks - response to Explore API call with filteredParks object
 
@@ -106,26 +120,46 @@ router.get('/focusTopics/:topicCode', function(req, res){
   // res.render('focus',{
   );
 
-
-router.get('/review', function(req, res){
-  res.render('review',{
-  });
-});
-
-router.post("/api/trips", function(req, res) {
-  trip.create([
-    "parkName", "parkCode", "parkRating", "activities", "topics",
-    "travel", "notes"
-  ], 
-  [req.body.parkName, req.body.parkCode, req.body.parkRating, req.body.activities, 
-    req.body.topics, req.body.travel, req.body.notes
-  ], 
+// router.post("/api/trips", function(req, res) {
+//   trip.create([
+//     "parkName", "parkCode", "parkRating", "activities", "topics",
+//     "travel", "notes"
+//   ], 
+//   [req.body.parkName, req.body.parkCode, req.body.parkRating, req.body.activities, 
+//     req.body.topics, req.body.travel, req.body.notes
+//   ], 
   
-  function(result) {
-    // Send back the ID of the new quote
-    res.json({ id: result.insertId });
-  });
+//   function(err, result) {
+//     if (err) {
+//       console.log(err);
+//     }
+//   });
+// });
+
+router.post('/api/trips', function(req, res) {
+  let sql = `INSERT INTO trips(park_name, park_code, park_rating, activities, topics, travel, notes) VALUES (?)`;
+  
+  console.log(JSON.stringify(req.body))
+  
+  let values = [
+    req.body.parkName, 
+    req.body.parkCode, 
+    req.body.parkRating, 
+    req.body.activities, 
+    req.body.topics, 
+    req.body.travel, 
+    req.body.notes
+  ];
+  connection.query(sql, [values], function(err, data, fields) {
+    if (err) throw err;
+    res.json({
+      status: 200,
+      message: "New trip added successfully"
+    })
+  })
 });
+
+
 
 
 module.exports = router;
