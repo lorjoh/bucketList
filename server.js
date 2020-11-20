@@ -2,7 +2,15 @@ const express = require('express');
 
 var app = express();
 
-// const fs = require("fs");
+const fs = require("fs");
+
+
+//   let parkTopics = fs.readFileSync("./data/topics.json", "utf8");
+
+//   console.log(parkTopics);
+
+// localStorage.parkTopics=JSON.stringify(parkTopics);
+
 
 // requiring module to protect api key as environment variable
 

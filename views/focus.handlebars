@@ -78,27 +78,27 @@
                           <legend class="col-form-label col-sm-2 pt-0" id="rateThisPark"></legend>
                           <div class="col-sm-10">
                             <div class="parkRating">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" >
                                 <label class="form-check-label" for="gridRadios1">
                                   1. Forget about it
                                 </label> 
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="2">
                                 <label class="form-check-label" for="gridRadios2">
                                   2. Worth a second look
                                 </label>
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="3">
                                 <label class="form-check-label" for="gridRadios3">
                                     3. Interesting
                                 </label>
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" checked>
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="4" checked>
                                 <label class="form-check-label" for="gridRadios4">
                                     4. Let's visit if we're in the area
                                 </label>
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="5">
                                 <label class="form-check-label" for="gridRadios5">
                                     5. This park is worth a special trip just to visit it
                                 </label>
@@ -179,6 +179,7 @@ let acadia = JSON.parse(localStorage.parkResponse);
 let activitiesFound =acadia.data[0].activities;
 let topicsFound = acadia.data[0].topics;
 let parkName = acadia.data[0].fullName;
+let parkCode = acadia.data[0].parkCode;
 
 let activitiesAdded ="";
 let topicsAdded ="";
@@ -214,6 +215,38 @@ $(".topic").on("click", function(){
 });
 
 $("#add-to-bucket").on("click", function(){
+
+let bucketItem =
+        { parkName : parkName,
+
+        parkCode: parkCode,
+
+        parkRating: document.querySelector('input[name="gridRadios"]:checked').value,
+
+        activities: activitiesAdded,
+
+        topics: topicsAdded,
+
+        travel: $('#inputTravel').val(),
+
+        notes: $('#inputNotes').val()
+
+         };
+
+console.log(focusResults);
+
+          $.ajax({
+          url: '/api/trips',
+          method: "POST",
+          data: bucketItem
+        })
+    
+          .then(function(response) {
+    
+            console.log(response);
+      
+          });  
+
   console.log('this button will save to bucket list in the future');
 });
 
