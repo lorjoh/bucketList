@@ -26,6 +26,6 @@ All three ParkPlace developers are behind in their coding bootcamp studies. This
 ### Improvements Road Map
 The following near-term improvements will greatly enhance the usefulness of "Bucket List" by ParkPlace:
 1. Use of a carousel to display the five beautiful pictures provided by the NPS database for each NPS property.
-1. User authentication using Passport or similar to allow multiple users to explore and save their Bucket Lists independently and securely.
-1. Using SendGrid or similar to email the Bucket List to the user or to friends.
-1. Add additional functionality inspired by the extensive topics in the "Bucket List" spiral-bound notebook and journal.
+2. User authentication using Passport or similar to allow multiple users to explore and save their Bucket Lists independently and securely.
+3. Using SendGrid or similar to email the Bucket List to the user or to friends.
+4. Add additional functionality inspired by the extensive topics in the "Bucket List" spiral-bound notebook and journal.
