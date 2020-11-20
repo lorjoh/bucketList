@@ -1,7 +1,24 @@
 
+// const fs = require("fs");
+
+
+
+
+// function getTopics(){
+
+//   let parkTopics = fs.readFileSync("./data/topics.json", "utf8");
+
+//   console.log(parkTopics);
+
+// }
+
+
+
 // var parkSelected2 = localStorage.chosenParkCode;
 var parkResponse="";
 var savedParkInfo="";
+
+
 
 
 // *********************************************************************************************
