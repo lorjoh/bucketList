@@ -21,6 +21,9 @@
 
 ### Project Description
  "Bucket List" aids travelers in planning and executing visits to 500 U.S. National Park Service properties. The app presents users with activities and topics featured at each property, and allows users to record their desires and plans.
+
+ ![Our inspiration, the "National Parks Bucket Journal," published by My Bucket Journals of Texas](https://user-images.githubusercontent.com/10477863/99752348-28ae7800-2ab2-11eb-9dde-135b4f3b7ab6.png)
+ 
 ### Installation
  The applications runs from a web server. No local installation is necessary. To access the site, visit this URL: URL_GOES_HERE.
 ### Usage
