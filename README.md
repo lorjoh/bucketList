@@ -1,7 +1,12 @@
 # Application: 'Bucket List' National Parks App
 
 ## Developer: The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo
- ![License: MIT](http://img.shields.io/static/v1?label=License&message=MIT&color=orange) 
+
+![Focus on Bryce Canyon National Park, #1](https://user-images.githubusercontent.com/10477863/99843471-9bb20000-2b3f-11eb-8604-00a13a33b2f9.png)
+![Focus on Bryce Canyon National Park, #2](https://user-images.githubusercontent.com/10477863/99843640-e3388c00-2b3f-11eb-9efe-3a1444c63357.png)
+
+![License: MIT](http://img.shields.io/static/v1?label=License&message=MIT&color=orange) 
+
 ### Table of Contents
 [Project Description](#project-description)
 
@@ -21,6 +26,9 @@
 
 ### Project Description
  "Bucket List" aids travelers in planning and executing visits to 500 U.S. National Park Service properties. The app presents users with activities and topics featured at each property, and allows users to record their desires and plans.
+
+ ![Our inspiration, the "National Parks Bucket Journal," published by My Bucket Journals of Texas](https://user-images.githubusercontent.com/10477863/99752348-28ae7800-2ab2-11eb-9dde-135b4f3b7ab6.png)
+ 
 ### Installation
  The applications runs from a web server. No local installation is necessary. To access the site, visit this URL: URL_GOES_HERE.
 ### Usage
@@ -37,5 +45,4 @@
  FastCompany.com says, '[E]xtremely straightforward and open. It permits users to do anything with a given project as long as they credit the developer and don’t hold him or her liable for the project’s use.'
 ### Questions and Contact Info
  The reader may raise questions and make comments to any member of the team. Sandra Ayika's telephone is (203) 600-4654 and her email is sandraayika@gmail.com. Doug Davidoff's telephone is (203) 522-8533 and his email is douglass.davidoff@gmail.com. Frank Salvo's telephone is (203) 822-4835 and his email is fhsalvo@yahoo.com.
- * Link to Github profile for the developer, The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo: [GitHub developer profile](https://github.com/lorjoh)
- * Email address for The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo: sandraayika@gmail.com
+ * Click for [GitHub repository](https://github.com/lorjoh/bucketList) for the The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo.
