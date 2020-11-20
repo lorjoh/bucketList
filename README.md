@@ -1,4 +1,5 @@
 # Application: 'Bucket List' National Parks App
+
 ## Developer: The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo
  ![License: MIT](http://img.shields.io/static/v1?label=License&message=MIT&color=orange) 
 ### Table of Contents
