@@ -2,8 +2,14 @@
 
 ## Developer: The ParkPlace team: Sandra Ayika, Doug Davidoff, and Frank Salvo
 
-![Focus on Bryce Canyon National Park, #1](https://user-images.githubusercontent.com/10477863/99843471-9bb20000-2b3f-11eb-8604-00a13a33b2f9.png)
-![Focus on Bryce Canyon National Park, #2](https://user-images.githubusercontent.com/10477863/99843640-e3388c00-2b3f-11eb-9efe-3a1444c63357.png)
+##### Home Page of National Parks Bucket List App
+![Home Page of App](https://user-images.githubusercontent.com/10477863/99888805-62e85880-2c1d-11eb-92fa-9fe3371b6eb1.png)
+
+##### App Page Focusing on One National Park
+![Park Focus Page #1](https://user-images.githubusercontent.com/10477863/99888903-531d4400-2c1e-11eb-962a-1fdae33be107.png)
+![Park Focus Page #2](https://user-images.githubusercontent.com/10477863/99888922-852ea600-2c1e-11eb-9cd5-48a39b170c1c.png)
+![Park Focus Page #3](https://user-images.githubusercontent.com/10477863/99888945-aa231900-2c1e-11eb-8bbb-38a5551dccc1.png)
+
 
 ![License: MIT](http://img.shields.io/static/v1?label=License&message=MIT&color=orange) 
 
