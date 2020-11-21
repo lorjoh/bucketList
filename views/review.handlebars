@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My Bucket List</title>
 </head>
-
+ 
 <body>
     <!--Jumbotron for Title-->
     <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;">
@@ -29,8 +29,6 @@
                     data-park-travel="{{travel}}"
                     data-park-notes="{{notes}}"
                 >
-                    
-                    
                     {{park_name}}</li> 
                 <hr/>
 
@@ -57,8 +55,6 @@
                             <h4 id=photoTitle1></h4>
                             <p id=caption1></p>
                         </div>
-
-                        {{!-- <button type="button" class="btn btn-primary" id="moreParkPhotos"></button> --}}
                         <br>
                         <br>
                         <br>
@@ -74,7 +70,6 @@
                                 <p id=parkEmail></p>
                             </div>
                         </div>
-
                         <br>
                         <br>
                         <h4 id=userNotes></h4>
@@ -122,31 +117,31 @@
                                     </div>
                                 </div>
                             </fieldset>
-
-                            <div class="form-group row">
-                                <label for="inputActivities" class="col-sm-2 col-form-label">Activities and topics
-                                    youd'd like
-                                    to explore at this park.</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" id="inputActivities"
-                                        placeholder="Hiking, Fishing, Photography, Dining">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputNotes" class="col-sm-2 col-form-label">Travel plans.</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" id="inputTravel"
-                                        placeholder="6 hour drive from Connecticut, leave early !">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputNotes" class="col-sm-2 col-form-label">Other notes about this
-                                    park.</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" id="inputNotes"
-                                        placeholder="find a romantic hotel in Bar Harbor.  Eat lobster !">
-                                </div>
-                            </div>
+                    <div class="form-group row">
+                      <label for="inputActivities" class="col-sm-2 col-form-label">Activities you'd like to do at this park</label>
+                      <div class="col-sm-10">
+                        <input class="form-control"  id="inputActivities" placeholder="At this park, we'd enjoy doing ...">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputActivities" class="col-sm-2 col-form-label">Topics you'd like to explore at this park</label>
+                      <div class="col-sm-10">
+                        <input class="form-control"  id="inputTopics" placeholder="At this park, we'd enjoy doing ...">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputNotes" class="col-sm-2 col-form-label">Travel plans</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="inputTravel" placeholder="When and how to travel to this park ...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputNotes" class="col-sm-2 col-form-label">Other notes about this park.</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" id="inputNotes" placeholder="More notes to plan your stay ...">
+                      {{ park_Info.notes}}
+                      
+                      </div>
                         </form>
                         <hr>
                     </div>
@@ -154,8 +149,6 @@
                 <button class=" btn btn-primary" style="margin:5px" float="right" type="button"
                     id="focus-on-park">Close</button>
             </div>
-
-
         </div>
     </div>
     <!--jQuery JS-->
@@ -165,32 +158,11 @@
 
 </body>
 <script>
-    // identify the saved parks and link the display call to the display
+
+// identify the saved parks and link the display call to the display
     var parkChoices = $("#park-choice-list");
     var displayBox = $(".focus-container");
     var defaultBox = $(".default-container");
-    var savedParksList = [
-        {
-            park_name: "Abraham Lincoln Birthplace National Historical Park",
-            park_code: "abli"
-        },
-        {
-            park_name: "Acadia National Park",
-            park_code: "acad"
-        },
-        {
-            park_name: "Adams National Historical Park",
-            park_code: "adam"
-        },
-        {
-            park_name: "African American Civil War Memorial ",
-            park_code: "afam"
-        },
-        {
-            park_name: "African Burial Ground National Monument",
-            park_code: "afbg"
-        }
-    ];
 
     $(".choice-item").on("click", function (event) {
         defaultBox.hide();
@@ -208,8 +180,6 @@
  
         renderDisplayBox(park);
         {{!-- displayBox.show(); --}}
-
-    
     });
 
     function renderDisplayBox(park) { 
@@ -222,11 +192,12 @@
         .then(function(focusItem) {
      
           console.log(focusItem);
-
           console.log(park);
 
             let parkName = focusItem.data[0].fullName;
             let shortName = focusItem.data[0].name;
+
+// populate park info based upon retrieved park data
 
         $('#header').html("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
         $('#parkName').html("Park Name: " + parkName);
@@ -241,21 +212,41 @@
         $('#photoCredit1').html(focusItem.data[0].images[0].credit);
         $('#photoTitle1').html(focusItem.data[0].images[0].title);
         $('#inputActivities').attr('placeholder', park.activities);
-
         $('#inputTravel').attr('placeholder', park.travel );
         $('#inputTopics').attr('placeholder', park.topics );
         $('#inputNotes').attr('placeholder', park.notes );
         $('#rateThisPark').html("Rate " + shortName); 
 
+// set radio buttons based upon retrieved park rating
+
+console.log('Park rating: ' + park.rating)
+
+        if (park.rating == 1 ) {
+            document.getElementById('gridRadios1').checked = true;
+            } 
+        else if (park.rating == 2) {
+            document.getElementById('gridRadios2').checked = true;
+            } 
+        else if (park.rating == 3) {
+            document.getElementById('gridRadios3').checked = true;
+            } 
+        else if (park.rating == 4) {
+            document.getElementById('gridRadios4').checked = true;
+            } 
+        else if (park.rating == 5) {
+            document.getElementById('gridRadios5').checked = true;
+            }       
+
           displayBox.show()
-            });
+
+        });
     }
 
     $("#focus-on-park").on("click", function () {
         displayBox.hide();
         defaultBox.show();
-
     });
+
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- //3// -->

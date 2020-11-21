@@ -7,11 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <title>BucketList Focus</title>
-    <!--Bootstrap CSS CDN-->
-    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
-    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css"> --}}
+
 </head>
 <body>
     <!--Jumbotron Page Title-->
@@ -31,18 +27,14 @@
             <div class="col-sm-3 bg-light">
                 <h5 class="pt-1" id = activitiesHed></h5>
                 <!--Here we create the list of activities at the park-->
-                {{!-- <p id = activitiesList></p> --}}
+               
                 <ul id='activityID'; style='padding-left: 20px'> </ul>
 
                 <h5 class="pt-1" id = topicsHed></h5>
                 <!--Here we create the list of topics at the park-->
                 <ul id='topicID' style='padding-left: 20px'></ul>
 
-                <!--section for search park list-->
-                {{!-- <button class=" btn btn-primary" type="button" id="return-to-explore">Back to Explore Parks</button> --}}
             </div>   
-
-
 
             <div class="col-sm-9">
                
@@ -125,7 +117,7 @@
                         <div class="col-sm-10">
                           <input class="form-control" id="inputTravel" placeholder="When and how to travel to this park ...">
                         </div>
-                      </div>
+                    </div>
                     <div class="form-group row">
                       <label for="inputNotes" class="col-sm-2 col-form-label">Other notes about this park.</label>
                       <div class="col-sm-10">
@@ -152,38 +144,13 @@
 
 <script>
 
-let focusResults = [
-        { parkName: "Grand Canyon National Park",
-
-        parkCode: "grca",
-
-        parkRating: "5",
-
-        activities: "hiking, climbing",
-
-        topics: "Native American History",
-
-        travel: "visit the Havasupi reservation",
-
-        notes: "check flight options "
-         }]
-
-
-{{!-- focusResults.parkName, focusResults.parkCode, focusResults.parkRating, focusResults.activities, focusResults.topics,
-    focusResults.travel, focusResults.notes --}}
-
-
-
 let acadia = JSON.parse(localStorage.parkResponse);
-
 let activitiesFound =acadia.data[0].activities;
 let topicsFound = acadia.data[0].topics;
 let parkName = acadia.data[0].fullName;
 let parkCode = acadia.data[0].parkCode;
-
 let activitiesAdded ="";
 let topicsAdded ="";
-
 
 activitiesFound.forEach(element => {
       let activityName = element.name;
@@ -233,6 +200,9 @@ let bucketItem =
 
          };
 
+console.log(document.querySelector('input[name="gridRadios"]:checked').text)
+
+
 console.log(focusResults);
 
           $.ajax({
@@ -246,10 +216,7 @@ console.log(focusResults);
             console.log(response);
       
           });  
-
-  console.log('this button will save to bucket list in the future');
 });
-
 
 $('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
 $('#parkName').append("Park Name: " + parkName);
