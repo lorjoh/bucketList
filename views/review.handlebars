@@ -222,19 +222,18 @@
 console.log('Park rating: ' + park.rating)
 
         if (park.rating == 1 ) {
-            document.getElementById('gridRadios1').checked = true;
+            $('#gridRadios1').prop('checked', true);
             } 
         else if (park.rating == 2) {
-            document.getElementById('gridRadios2').checked = true;
-            } 
+            $('#gridRadios2').prop('checked', true);                      } 
         else if (park.rating == 3) {
-            document.getElementById('gridRadios3').checked = true;
+            $('#gridRadios3').prop('checked', true);   
             } 
         else if (park.rating == 4) {
-            document.getElementById('gridRadios4').checked = true;
+            $('#gridRadios4').prop('checked', true);  
             } 
         else if (park.rating == 5) {
-            document.getElementById('gridRadios5').checked = true;
+            $('#gridRadios5').prop('checked', true);  
             }       
 
           displayBox.show()

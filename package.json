@@ -5,15 +5,16 @@
   "main": "server.js",
   "engines": {
     "node": "*"
-    },
-
+  },
   "scripts": {
-       "start": "node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "*",
     "express-handlebars": "*",
+    "jquery-confirm": "^3.3.4",
     "mysql": "*"
   },
   "author": "FHS, DD, SMA",
