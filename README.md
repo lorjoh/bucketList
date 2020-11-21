@@ -32,7 +32,8 @@
  ![Our inspiration, the "National Parks Bucket Journal," published by My Bucket Journals of Texas](https://user-images.githubusercontent.com/10477863/99752348-28ae7800-2ab2-11eb-9dde-135b4f3b7ab6.png)
  
 ### Installation
- The applications runs from a web server. No local installation is necessary. To access the site, visit this URL: URL_GOES_HERE.
+ The applications runs from a web server. No local installation is necessary. To access the site, visit this URL:
+ [https://nationalparksjournal.herokuapp.com/](https://nationalparksjournal.herokuapp.com/).
 
 ### Usage
  The user arrives first at the "Explore" page. Here, the user may explore the 500 National Park Service properties by name, or by choosing activities or topics the user would like to pursue at a park. Working through this rubric, the user selects a park for greater attention and arrives at the "Focus" page. Here the user is presented with more details about the park as well as beautiful photography by National Park Service photographers. The user is able to record information about their plans for visiting the park, and the information is stored in a cloud database. Finally, on the "Bucket List" page, the user can review the information they have recorded. 
