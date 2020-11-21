@@ -4,21 +4,11 @@ var app = express();
 
 const fs = require("fs");
 
-
-//   let parkTopics = fs.readFileSync("./data/topics.json", "utf8");
-
-//   console.log(parkTopics);
-
-// localStorage.parkTopics=JSON.stringify(parkTopics);
-
-
-// requiring module to protect api key as environment variable
-
 const path = require('path');
 const exphbs = require('express-handlebars')
 
 app.use(express.static("public"));
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 // app.set('port', (process.env.PORT || 8000));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));

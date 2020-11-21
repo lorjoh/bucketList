@@ -26,11 +26,13 @@
 
             <div class="col-sm-3 bg-light">
                 <h5 class="pt-1" id = activitiesHed></h5>
+                <p  style='font-size:80%' >(click to add)</p>
                 <!--Here we create the list of activities at the park-->
                
                 <ul id='activityID'; style='padding-left: 20px'> </ul>
 
                 <h5 class="pt-1" id = topicsHed></h5>
+                <p  style='font-size:80%' >(click to add)</p>
                 <!--Here we create the list of topics at the park-->
                 <ul id='topicID' style='padding-left: 20px'></ul>
 
@@ -80,12 +82,12 @@
                                   2. Worth a second look
                                 </label>
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="3">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="3" checked>
                                 <label class="form-check-label" for="gridRadios3">
                                     3. Interesting
                                 </label>
                               <br>
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="4" checked>
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="4" >
                                 <label class="form-check-label" for="gridRadios4">
                                     4. Let's visit if we're in the area
                                 </label>
@@ -139,6 +141,9 @@
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!--Code to Jvascript File-->
     <script src="script.js"></script>
 
@@ -203,7 +208,7 @@ let bucketItem =
 console.log(document.querySelector('input[name="gridRadios"]:checked').text)
 
 
-console.log(focusResults);
+{{!-- console.log(focusResults); --}}
 
           $.ajax({
           url: '/api/trips',
@@ -214,7 +219,12 @@ console.log(focusResults);
           .then(function(response) {
     
             console.log(response);
-      
+
+      $.dialog('Trip saved to My Bucket List !');
+    
+
+
+
           });  
 });
 

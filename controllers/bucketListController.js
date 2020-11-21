@@ -142,7 +142,4 @@ router.post('/api/trips', function(req, res) {
   })
 });
 
-
-
-
 module.exports = router;
