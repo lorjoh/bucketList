@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "National Park Bucket List maker",
   "main": "server.js",
+  "engines": {
+    "node": "*"
+    },
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "API_KEY=super-secret-key node index.js"
+       "start": "node server.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
