@@ -22,6 +22,8 @@
 
 [Technologies Employed](#technologies-employed)
 
+[Successes and Challenges](#successes-and-challenges)
+
 [Future Development](#future-development)
 
 [Contributors](#contributors)
@@ -46,6 +48,13 @@
 
 ### Technologies Employed
  THIS IS DUMMY TEXT WHICH FRANK WILL REPLACE WITH A PAGE-BY-PAGE DESCRIPTION OF TECHNOLOGIES EMPLOYED.
+ 
+ 
+### Successes and Challenges
+ #### Successes
+ #### Challenges
+ 1. GitHub was a challenge throughout the project. We had great difficulty managing the repo on GitHub. Even this README file engendered difficulties. The biggest manifestation of the GitHub problems came in deploying the app to Heroku. As a result, we created a copy of the repo and deployed it to GitHub on [https://nationalparksjournal.herokuapp.com](https://nationalparksjournal.herokuapp.com). An earlier Heroku link, [https://bucketlist-journal.herokuapp.com/](https://bucketlist-journal.herokuapp.com/), is not functioning and cannot be used.
+ 
  
 ### Future Development
  Near-term improvements will greatly enhance the usefulness of "Bucket List" by ParkPlace. Among these improvements are: (a) use of a carousel to display the five beautiful pictures provided by the NPS database for each NPS property, (b) user authentication using Passport or similar to allow multiple users to explore and save their Bucket Lists independently and securely, (c) using SendGrid or similar to email the user's Bucket List to the user or to friends, and (d) add additional functionality inspired by the extensive topics in the "National Parks Bucket List" spiral-bound journal and notebook published by My Bucket Journals, a small family-owned company which is not affiliated with the ParkPlace team but nonetheless provided the inspiration for this app.
