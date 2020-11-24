@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My Bucket List</title>
+
 </head>
  
 <body>
@@ -37,15 +38,13 @@
 
             </div>
             <div class=" default-container  col-sm-8" style="border-style:solid; display:block; border-radius:5px;">
-             <!-- <picture>  <img src="wild-water-adventures.jpg" class="img-fluid" alt="Responsive image">  -->
-                <!-- <img src="collage-of-national-parks.jpg" alt="National Parks"> -->
-                <!-- <img src="yellowstone.png" class="img-fluid" alt="Responsive image">  -->
-                <!-- <img src="canyonlands-national-park-utah-collage-01-thomas-woolworth.jpg" alt="canyon Parks"> -->
+             
+    {{!-- default image --}}
                 <img src="https://geogypsytraveler.com/wp-content/uploads/2016/08/01-NP-images-collage-1024x576_thumb.jpg" class="img-thumbnail" alt="Responsive image"> 
             </picture>
             </div>
             <div class=" focus-container  col-sm-8" style="border-style:solid; width:auto; display:none; border-radius:5px;">
-                <!--Row for searching a park-->
+    <!--Row for displaying park info-->
                 <div class="row">
                     <div class="col-sm-12">
                         <div>
@@ -221,6 +220,12 @@
 
 console.log('Park rating: ' + park.rating)
 
+        $('#gridRadios1').prop('disabled', true)
+        $('#gridRadios2').prop('disabled', true)
+        $('#gridRadios3').prop('disabled', true)
+        $('#gridRadios4').prop('disabled', true)
+        $('#gridRadios5').prop('disabled', true)
+
         if (park.rating == 1 ) {
             $('#gridRadios1').prop('checked', true);
             } 
@@ -248,8 +253,6 @@ console.log('Park rating: ' + park.rating)
 
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- //3// -->
-<!-- <script src="./apiCalls.js"></script>
-<script src="./apiCalls.js"></script> -->
+
 
 </html>

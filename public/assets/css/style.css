@@ -45,3 +45,20 @@ li:hover{
     background-color: lightslategray;
     text-decoration: underline;
 }
+.card-carousel img {
+    height:550px;
+    width:850px
+  }
+
+  .card-carousel {
+    background: lightgray;
+    border: none;
+    height: 100%;
+    width: 100%
+  }
+
+  /* .card-carousel p {
+    background: lightgray;
+    border: none
+  } */
+
