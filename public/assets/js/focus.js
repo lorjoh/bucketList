@@ -81,68 +81,74 @@ $(".topic").on("click", function(){
 });
 
 // jquery to populate the park data into the template that is rendered 
-
-$('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
-$('#parkName').append("Park Name: " + parkName);
-$('#location').append("Location: " + acadia.data[0].addresses[0].city +", " + acadia.data[0].addresses[0].stateCode);
-$('#description').append("Description: " + acadia.data[0].description);
-$('#website').append("Website: <a href>" + acadia.data[0].url + "</a>");
-$('#phoneNumber').append("Telephone " + acadia.data[0].contacts.phoneNumbers[0].phoneNumber);
-$('#parkEmail').append("Park Email: " + acadia.data[0].contacts.emailAddresses[0].emailAddress);
-let shortName = acadia.data[0].name;
-$('#photoHed').append("Photo From " + shortName);
-$('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
-$('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
-$('#userNotes').append("<strong>Record Your Notes About " + shortName + "</strong>");
-$('#moreParkPhotos').append("More photos of " + shortName);
-$('#rateThisPark').append("Rate " + shortName);
+                                            
+    $('#header').append("<h1><strong>Let's Focus on " + parkName + "</strong><h1>");
+    $('#parkName').append("Park Name: " + parkName);
+  if (acadia.data[0].addresses.length >0){
+    $('#location').append("Location: " + acadia.data[0].addresses[0].city +", " + acadia.data[0].addresses[0].stateCode);
+    }
+    $('#description').append("Description: " + acadia.data[0].description);
+    $('#website').append("Website: <a href>" + acadia.data[0].url + "</a>");
+    $('#phoneNumber').append("Telephone " + acadia.data[0].contacts.phoneNumbers[0].phoneNumber);
+    $('#parkEmail').append("Park Email: " + acadia.data[0].contacts.emailAddresses[0].emailAddress);
+    let shortName = acadia.data[0].name;
+    $('#photoHed').append("Photo From " + shortName);
+    $('#activitiesHed').append("<strong>" + shortName + " Actvities</strong>");
+    $('#topicsHed').append("<strong>" + shortName + " Topics</strong>");
+    $('#userNotes').append("<strong>Record Your Notes About " + shortName + "</strong>");
+    $('#moreParkPhotos').append("More photos of " + shortName);
+    $('#rateThisPark').append("Rate " + shortName);                 
 
 // photos and related information which drives the tiny-slider carousel 
 
-$('#photoTitle1').append(acadia.data[0].images[0].title);
-$('#caption1').append(acadia.data[0].images[0].caption);
-$('#photo1').attr("src", acadia.data[0].images[0].url);
-$('#photoCredit1').append(acadia.data[0].images[0].credit);
+    $('#photoTitle1').append(acadia.data[0].images[0].title);
+    $('#caption1').append(acadia.data[0].images[0].caption);
+    $('#photo1').attr("src", acadia.data[0].images[0].url);
+    $('#photoCredit1').append(acadia.data[0].images[0].credit);
 
-$('#photoTitle2').append(acadia.data[0].images[1].title);
-$('#caption2').append(acadia.data[0].images[1].caption);
-$('#photo2').attr("src", acadia.data[0].images[1].url);
-$('#photoCredit2').append(acadia.data[0].images[1].credit);
+    if (acadia.data[0].images.length > 1){
 
-$('#photoTitle3').append(acadia.data[0].images[2].title);
-$('#caption3').append(acadia.data[0].images[2].caption);
-$('#photo3').attr("src", acadia.data[0].images[2].url);
-$('#photoCredit3').append(acadia.data[0].images[2].credit);
+        $('#photoTitle2').append(acadia.data[0].images[1].title);
+        $('#caption2').append(acadia.data[0].images[1].caption);
+        $('#photo2').attr("src", acadia.data[0].images[1].url);
+        $('#photoCredit2').append(acadia.data[0].images[1].credit);
 
-$('#photoTitle4').append(acadia.data[0].images[3].title);
-$('#caption4').append(acadia.data[0].images[3].caption);
-$('#photo4').attr("src", acadia.data[0].images[3].url);
-$('#photoCredit4').append(acadia.data[0].images[3].credit);
+        $('#photoTitle3').append(acadia.data[0].images[2].title);
+        $('#caption3').append(acadia.data[0].images[2].caption);
+        $('#photo3').attr("src", acadia.data[0].images[2].url);
+        $('#photoCredit3').append(acadia.data[0].images[2].credit);
+
+        $('#photoTitle4').append(acadia.data[0].images[3].title);
+        $('#caption4').append(acadia.data[0].images[3].caption);
+        $('#photo4').attr("src", acadia.data[0].images[3].url);
+        $('#photoCredit4').append(acadia.data[0].images[3].credit);
+
+    }
 
 // tiny-slider carousel
 
-var slider = tns({
-  container: '.my-slider',
-  items: 1,
-  autoplay: true,
-  loop: true,
-  controls: false,
-  nav: false,
-  autoplayButtonOutput: false,
-  navPosition: "bottom", 
-  navPosition: "center",
-  responsive: {
-    640: {
-      edgePadding: 0,
-      gutter: 0,
-      items: 2
-    },
-    700: {
-      gutter: 0
-    },
-    900: {
-      items: 1
+    var slider = tns({
+    container: '.my-slider',
+    items: 1,
+    autoplay: true,
+    loop: true,
+    controls: false,
+    nav: false,
+    autoplayButtonOutput: false,
+    navPosition: "bottom", 
+    navPosition: "center",
+    responsive: {
+        640: {
+        edgePadding: 0,
+        gutter: 0,
+        items: 2
+        },
+        700: {
+        gutter: 0
+        },
+        900: {
+        items: 1
+        }
     }
-  }
-});
+    });
 
