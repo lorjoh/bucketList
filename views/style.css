@@ -35,3 +35,7 @@ li:hover{
     background-color: lightslategray;
     text-decoration: underline;
 }
+
+.card-carousel {
+  height:400px;
+}

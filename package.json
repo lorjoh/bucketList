@@ -15,7 +15,8 @@
     "express": "*",
     "express-handlebars": "*",
     "jquery-confirm": "^3.3.4",
-    "mysql": "*"
+    "mysql": "*",
+    "tiny-slider": "^2.9.3"
   },
   "author": "FHS, DD, SMA",
   "license": "ISC"

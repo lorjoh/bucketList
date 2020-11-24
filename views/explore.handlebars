@@ -6,16 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Explore Page</title>
-    <!--Bootstrap CSS CDN-->
-    {{!-- <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" /> --}}
-    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css"> --}}
+
 </head>
 
 <body>
-    <!--Jumbotron for Title-->
+    <!--Jumbotron for Title (modified)-->
     <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#404040 ;color: white;">
         <h1>Let's Explore our National Parks !</h1>
     </div>
@@ -58,7 +53,7 @@
                         </select>
                     </button>
                 </div>
-                <!-- <hr> -->
+
 
             </div>
 
@@ -109,28 +104,22 @@
             </div>
 
 
-            <!-- <div class="row ml-2 border border-dark rounded"> -->
-            <!-- </div> -->
+
         </div>
         <hr>
     </div>
    
     <!--jQuery JS-->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
     
 <!--Code to Jvascript File-->
 
 </body>
 <script>
 
-console.log(activities);
-
-    {{!-- const fs = require("fs");
-
-     let parkTopics = fs.readFileSync("./data/topics.json", "utf8");
-
-     console.log(parkTopics); --}}
+    // ***************************************************************************
+    // Topic block
 
     function populateTopic() {
         var topic = document.getElementById('selectedTopic');
@@ -140,7 +129,6 @@ console.log(activities);
                 '<option value="' + topics[i]['topic_code'] + '">' + topics[i]['topic_name'] + '</option>';
         }
     }
-
 
     function showTopic(topic) {
         // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
@@ -200,7 +188,7 @@ console.log(activities);
         };
 
     // ***************************************************************************
-    // filteredParkblock
+    // filteredParkblock - display a pull-down list of parks which meet criteria
 
         var filteredParks="";
 
@@ -238,10 +226,6 @@ console.log(activities);
             // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
             var filteredParkSelected = document.getElementById('selectedFilteredPark');
             let parkChoice = filteredPark.options[filteredPark.selectedIndex].text 
-
-            // selectedFilteredPark.innerHTML = 'Selected Filtered Park: <b>' + 
-            //     parkChoice + '</b> </br>' +
-            //     'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
             selectedFilteredPark.innerHTML = 'ID: <b class="codes">' + 'code' + filteredPark.value + '</b>';
                 console.log(selectedFilteredPark.innerHTML);
             let chosenParkCode = selectedFilteredPark.innerHTML.slice(8);
@@ -252,73 +236,50 @@ console.log(activities);
             console.log('Park Choice Code: ' + chosenParkCode)
             console.log('Park Choice Name: ' + parkChoice)
             saveParkCode(chosenParkCode);
-
-            //    event.preventDefault();
         };
 
- 
-
-
-
-
-
-
-
-
-
-
     // ***************************************************************************
-    // list population and listeners
+    // List population and listeners
 
+        populatePark()
+        populateTopic()
+        populateActivity()
 
+        $(".list-group-item").on("click", function(){
+        let code = $(this).find(".codes").text();
+        console.log(code);
+        });
 
-    populatePark()
-    populateTopic()
-    populateActivity()
+        $("#activitySelected").on("click", function(){
+        let code = $(this).find(".codes").text();
+        // console.log("Activity = " + code);
+        getParksFromActivities()
 
-$(".list-group-item").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log(code);
-});
+        });
 
-$("#activitySelected").on("click", function(){
-let code = $(this).find(".codes").text();
-// console.log("Activity = " + code);
-getParksFromActivities()
-// populateFilteredParks()
-});
+        $("#topicSelected").on("click", function(){
+        let code = $(this).find(".codes").text();
+        console.log("Topic listener fired");
+        getParksFromTopics()
 
-$("#topicSelected").on("click", function(){
-let code = $(this).find(".codes").text();
-console.log("Topic listener fired");
-getParksFromTopics()
-// populateFilteredParks()
-});
+        });
 
-$("#parkSelected").on("click", function(){
-    $("#finalParkSelection").empty()
-    let displayPark = 'Park Chosen: ' +  '</b> </br>' + localStorage.parkSelectedName;
-    $('#finalParkSelection').append(displayPark)
-});
+        $("#parkSelected").on("click", function(){
+            $("#finalParkSelection").empty()
+            let displayPark = 'Park Chosen: ' +  '</b> </br>' + localStorage.parkSelectedName;
+            $('#finalParkSelection').append(displayPark)
+        });
 
-$("#focus-on-park").on("click", function(){
-  getParkFocusInfo()  
-});
+        $("#focus-on-park").on("click", function(){
+        getParkFocusInfo()  
+        });
 
-$("#clear-search").on("click", function(){
+        $("#clear-search").on("click", function(){
 
-    $("#finalParkSelection").empty();
-});
-
-// $('#focus-on-park').on("click", function(){
-
-// getSelectedParkInfo()
-
-// });
+            $("#finalParkSelection").empty();
+        });
 
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-{{!-- <script src= "./apiCalls.js"></script>
-<script src= "./apiCalls.js"></script> --}}
 
 </html>
